@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="SCMainViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmu-8w-ln7">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Your User Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oCg-5F-X16">
+                                        <rect key="frame" x="22" y="422" width="331" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="OSA-aS-pqp"/>
+                                        </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="hgv-DZ-p5n"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVu-ir-gt0">
+                                        <rect key="frame" x="8" y="150" width="359" height="145"/>
+                                        <string key="text">Notifications Widget
+For GitHub</string>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="34"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="oCg-5F-X16" firstAttribute="leading" secondItem="cmu-8w-ln7" secondAttribute="leading" constant="6" id="0oj-8b-6GK"/>
+                                    <constraint firstItem="oCg-5F-X16" firstAttribute="trailing" secondItem="cmu-8w-ln7" secondAttribute="trailing" constant="-6" id="AgT-P0-Wsy"/>
+                                    <constraint firstItem="bVu-ir-gt0" firstAttribute="centerX" secondItem="cmu-8w-ln7" secondAttribute="centerX" id="NzI-Wj-bt1"/>
+                                    <constraint firstItem="oCg-5F-X16" firstAttribute="bottom" secondItem="cmu-8w-ln7" secondAttribute="bottom" constant="-145" id="t51-2e-uLK"/>
+                                    <constraint firstItem="bVu-ir-gt0" firstAttribute="top" secondItem="cmu-8w-ln7" secondAttribute="top" constant="150" id="yCr-RJ-VWD"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fS4-hE-PiH">
+                                <rect key="frame" x="0.0" y="571" width="375" height="96"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ME8-Ar-j7P">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Update Info">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="updateInfoButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xrM-1B-oBN"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="ME8-Ar-j7P" firstAttribute="trailing" secondItem="fS4-hE-PiH" secondAttribute="trailing" id="3TW-7y-DPR"/>
+                                    <constraint firstItem="ME8-Ar-j7P" firstAttribute="leading" secondItem="fS4-hE-PiH" secondAttribute="leading" id="57n-Rw-XKB"/>
+                                    <constraint firstItem="ME8-Ar-j7P" firstAttribute="top" secondItem="fS4-hE-PiH" secondAttribute="top" id="MoR-Cd-Jsc"/>
+                                    <constraint firstItem="ME8-Ar-j7P" firstAttribute="bottom" secondItem="fS4-hE-PiH" secondAttribute="bottom" id="NWO-8z-PBI"/>
+                                    <constraint firstAttribute="height" constant="96" id="lyE-bu-nbe"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="fS4-hE-PiH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="5kx-Gp-gCq"/>
+                            <constraint firstItem="fS4-hE-PiH" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="6KK-Ra-MKa"/>
+                            <constraint firstItem="fS4-hE-PiH" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="9UB-90-rLi"/>
+                            <constraint firstItem="cmu-8w-ln7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="GQe-by-cLk"/>
+                            <constraint firstItem="cmu-8w-ln7" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="PrV-3P-HwD"/>
+                            <constraint firstItem="cmu-8w-ln7" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="Zlf-uU-pAx"/>
+                            <constraint firstItem="cmu-8w-ln7" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="gl9-oD-2nt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="updateInfoButton" destination="ME8-Ar-j7P" id="eLQ-VX-MQd"/>
+                        <outlet property="userNameField" destination="oCg-5F-X16" id="0Bl-6h-1fT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="117.59999999999999" y="122.78860569715144"/>
+        </scene>
+    </scenes>
+</document>
