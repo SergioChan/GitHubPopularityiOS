@@ -40,6 +40,6 @@ CGSize CGSizeScale(CGSize size, CGFloat scale);
 - (CGFloat) widthForString:(NSString *)value fontSize:(CGFloat)fontSize andHeight:(CGFloat)height;
 - (CGFloat) heightForString:(NSString *)value font:(UIFont *)font andWidth:(CGFloat)width;
 
-- (UIViewController *) getCurrentVC;
+//- (UIViewController *) getCurrentVC;
 - (UIImage *) convertViewToImage;
 @end
