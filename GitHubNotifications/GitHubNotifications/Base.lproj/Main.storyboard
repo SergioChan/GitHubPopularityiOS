@@ -29,9 +29,10 @@
                                             <constraint firstAttribute="height" constant="100" id="OSA-aS-pqp"/>
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="continue"/>
                                         <connections>
+                                            <action selector="shouldReturnKey:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="OZK-JM-9Ds"/>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="hgv-DZ-p5n"/>
                                         </connections>
                                     </textField>
@@ -58,9 +59,9 @@ For GitHub</string>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ME8-Ar-j7P">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                         <state key="normal" title="Update Info">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="updateInfoButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xrM-1B-oBN"/>

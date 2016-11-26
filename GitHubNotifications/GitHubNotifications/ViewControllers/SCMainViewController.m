@@ -8,8 +8,9 @@
 
 #import "SCMainViewController.h"
 #import "UIView+ViewFrameGeometry.h"
+#import "GithubAuthController.h"
 
-@interface SCMainViewController () <UITextFieldDelegate>
+@interface SCMainViewController () <UITextFieldDelegate,GitAuthDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *userNameField;
 @property (weak, nonatomic) IBOutlet UIButton *updateInfoButton;
@@ -64,7 +65,13 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    _userNameField.text = @"";
+    if ([_userNameField.text isEqualToString:@"Your User Name"]) {
+        _userNameField.text = @"";
+    }
+}
+
+- (IBAction)shouldReturnKey:(id)sender {
+    [_userNameField resignFirstResponder];
 }
 
 - (void)tap:(id)sender
@@ -74,17 +81,56 @@
 
 - (IBAction)updateInfoButtonPressed:(id)sender {
     NSString *trimmedName = [_userNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    [[[NSUserDefaults alloc] initWithSuiteName:@"group.sergio.chan.GitHubNotification"] setObject:trimmedName forKey:@"GitHubNotificationsName"];
+    
+    if ([trimmedName isEqualToString:@"Your User Name"] || [trimmedName isEqualToString:@""]) {
+        return;
+    }
     
     UIButton *button = (UIButton *)sender;
-    [[[NSUserDefaults alloc] initWithSuiteName:@"group.sergio.chan.GitHubNotification"] removeObjectForKey:@"GitHubNotificationsArray"];
+    [button setTitle:@"Authenticating ... " forState:UIControlStateNormal];
+    [self checkGitAuth];
     
-    [button setTitle:@"Widget will update soon" forState:UIControlStateNormal];
+//    [[[NSUserDefaults alloc] initWithSuiteName:@"group.sergio.chan.GitHubNotification"] setObject:trimmedName forKey:@"GitHubNotificationsName"];
+//    
+//    UIButton *button = (UIButton *)sender;
+//    [[[NSUserDefaults alloc] initWithSuiteName:@"group.sergio.chan.GitHubNotification"] removeObjectForKey:@"GitHubNotificationsArray"];
+//    
+//    [button setTitle:@"Widget will update soon" forState:UIControlStateNormal];
+}
+
+-(void) checkGitAuth
+{
+    GithubAuthController *githubAuthController = [[GithubAuthController alloc] init];
+    githubAuthController.authDelegate = self;
+    
+    githubAuthController.modalPresentationStyle = UIModalPresentationFormSheet;
+    githubAuthController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    [self presentViewController:githubAuthController animated:YES completion:^{ } ];
+    
+    __weak __block GithubAuthController *weakAuthController = githubAuthController;
+    
+    githubAuthController.completionBlock = ^(void) {
+        [weakAuthController dismissViewControllerAnimated:YES completion:nil];
+    };
+}
+
+-(void) didAuth:(NSString*)token
+{
+    if(!token)
+    {
+        return;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 /*

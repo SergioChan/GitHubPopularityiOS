@@ -10,27 +10,45 @@
 #import <NotificationCenter/NotificationCenter.h>
 #import "SCGraphView.h"
 #import "UIView+ViewFrameGeometry.h"
+#import "SCFollowerAndStarManager.h"
 
 @interface TodayViewController () <NCWidgetProviding>
-
+{
+    BOOL accountHasSet;
+}
 @end
 
 @implementation TodayViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSLog(@"fuck here ... %f",self.view.height);
+    accountHasSet = NO;
     
     SCGraphView *fuck = [[SCGraphView alloc] initWithFrame:CGRectMake(5.0f, 10.0f, self.view.width - 30.0f, 100.0f) columns:24];
     [self.view addSubview:fuck];
+    
+    UIButton *tapToSetButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, 100.0f)];
+    tapToSetButton.backgroundColor = [UIColor clearColor];
+    tapToSetButton.titleLabel.font = [UIFont systemFontOfSize:17.0f];
+    tapToSetButton.titleLabel.numberOfLines = 2;
+    [tapToSetButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    tapToSetButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [tapToSetButton setTitle:@"Tap to initialize your \n Github Account" forState:UIControlStateNormal];
+    [tapToSetButton addTarget:self action:@selector(goSettingsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    NSString *userName = [[[NSUserDefaults alloc] initWithSuiteName:SCSharedDataGroupKey]  objectForKey:@"GitHubNotificationsName"];
+    if (userName == nil) {
+        fuck.alpha = 0.0f;
+        [self.view addSubview:tapToSetButton];
+    } else {
+        accountHasSet = YES;
+    }
     
     self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
 
     // Do any additional setup after loading the view from its nib.
 }
 
-- (IBAction)goSettingsButtonPressed:(UIButton *)sender
+- (void)goSettingsButtonPressed:(id)sender
 {
     NSURL *url = [NSURL URLWithString:@"sergio.chan.GitHubNotifications://"];
     [self.extensionContext openURL:url completionHandler:nil];

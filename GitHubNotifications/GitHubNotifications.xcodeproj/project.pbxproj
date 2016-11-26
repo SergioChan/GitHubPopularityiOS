@@ -7,11 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		210E2FB238157FE168F524FB /* libPods-GitHubNotifications.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4FCAF87D505E39DFBDB460 /* libPods-GitHubNotifications.a */; };
+		44BB6B30770C8D41144FCB9E /* libPods-GitHubNotifications.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C4FCAF87D505E39DFBDB460 /* libPods-GitHubNotifications.a */; };
 		5027B4651DE927F500AE7D03 /* UIView+ViewFrameGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B4631DE927F500AE7D03 /* UIView+ViewFrameGeometry.m */; };
 		5027B4661DE927F500AE7D03 /* UIView+ViewFrameGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B4631DE927F500AE7D03 /* UIView+ViewFrameGeometry.m */; };
 		5027B46A1DE9322300AE7D03 /* SCFollowerAndStarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B4691DE9322300AE7D03 /* SCFollowerAndStarManager.m */; };
 		5027B46B1DE9322300AE7D03 /* SCFollowerAndStarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B4691DE9322300AE7D03 /* SCFollowerAndStarManager.m */; };
+		5027B46E1DE9854000AE7D03 /* SCStarGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B46D1DE9854000AE7D03 /* SCStarGraphView.m */; };
+		5027B46F1DE9854000AE7D03 /* SCStarGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B46D1DE9854000AE7D03 /* SCStarGraphView.m */; };
+		5027B4731DE9856C00AE7D03 /* SCNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B4721DE9856C00AE7D03 /* SCNetworkManager.m */; };
+		5027B4741DE9856C00AE7D03 /* SCNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B4721DE9856C00AE7D03 /* SCNetworkManager.m */; };
+		5027B47D1DE9C82300AE7D03 /* GithubAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B4781DE9C82300AE7D03 /* GithubAuthController.m */; };
+		5027B47E1DE9C82300AE7D03 /* GithubAuthenticatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B47A1DE9C82300AE7D03 /* GithubAuthenticatorView.m */; };
+		5027B47F1DE9C82300AE7D03 /* NSDictionary+UrlEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B47C1DE9C82300AE7D03 /* NSDictionary+UrlEncoding.m */; };
 		507666F91DE88FFC004291F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 507666F81DE88FFC004291F8 /* main.m */; };
 		507666FC1DE88FFC004291F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 507666FB1DE88FFC004291F8 /* AppDelegate.m */; };
 		507667021DE88FFC004291F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 507667001DE88FFC004291F8 /* Main.storyboard */; };
@@ -25,6 +32,7 @@
 		50D7C8F81DE920A800927FB9 /* GitHubNotificationTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 50D7C8EB1DE920A800927FB9 /* GitHubNotificationTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		50D7C9001DE922A000927FB9 /* SCGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D7C8FF1DE922A000927FB9 /* SCGraphView.m */; };
 		50D7C9041DE9230600927FB9 /* SCItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 50D7C9031DE9230600927FB9 /* SCItemView.m */; };
+		7BB1ECB1C1F34380DB65FE0C /* libPods-GitHubNotificationTodayExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B066974D1D1B95A12C59CDF8 /* libPods-GitHubNotificationTodayExtension.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,11 +60,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		03BE628B079756275D0CB952 /* Pods-GitHubNotifications.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubNotifications.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GitHubNotifications/Pods-GitHubNotifications.debug.xcconfig"; sourceTree = "<group>"; };
 		5027B4631DE927F500AE7D03 /* UIView+ViewFrameGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ViewFrameGeometry.m"; sourceTree = "<group>"; };
 		5027B4641DE927F500AE7D03 /* UIView+ViewFrameGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ViewFrameGeometry.h"; sourceTree = "<group>"; };
 		5027B4681DE9322300AE7D03 /* SCFollowerAndStarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCFollowerAndStarManager.h; sourceTree = "<group>"; };
 		5027B4691DE9322300AE7D03 /* SCFollowerAndStarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCFollowerAndStarManager.m; sourceTree = "<group>"; };
+		5027B46C1DE9854000AE7D03 /* SCStarGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCStarGraphView.h; sourceTree = "<group>"; };
+		5027B46D1DE9854000AE7D03 /* SCStarGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCStarGraphView.m; sourceTree = "<group>"; };
+		5027B4711DE9856C00AE7D03 /* SCNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNetworkManager.h; sourceTree = "<group>"; };
+		5027B4721DE9856C00AE7D03 /* SCNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNetworkManager.m; sourceTree = "<group>"; };
+		5027B4771DE9C82300AE7D03 /* GithubAuthController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GithubAuthController.h; sourceTree = "<group>"; };
+		5027B4781DE9C82300AE7D03 /* GithubAuthController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GithubAuthController.m; sourceTree = "<group>"; };
+		5027B4791DE9C82300AE7D03 /* GithubAuthenticatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GithubAuthenticatorView.h; sourceTree = "<group>"; };
+		5027B47A1DE9C82300AE7D03 /* GithubAuthenticatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GithubAuthenticatorView.m; sourceTree = "<group>"; };
+		5027B47B1DE9C82300AE7D03 /* NSDictionary+UrlEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UrlEncoding.h"; sourceTree = "<group>"; };
+		5027B47C1DE9C82300AE7D03 /* NSDictionary+UrlEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UrlEncoding.m"; sourceTree = "<group>"; };
+		5027B4831DE9C84400AE7D03 /* Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
 		507666F41DE88FFC004291F8 /* GitHubNotifications.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubNotifications.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		507666F81DE88FFC004291F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		507666FA1DE88FFC004291F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -79,8 +97,12 @@
 		50D7C8FF1DE922A000927FB9 /* SCGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGraphView.m; sourceTree = "<group>"; };
 		50D7C9021DE9230600927FB9 /* SCItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCItemView.h; sourceTree = "<group>"; };
 		50D7C9031DE9230600927FB9 /* SCItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCItemView.m; sourceTree = "<group>"; };
+		67771657903971DE2A1A9D3F /* Pods-GitHubNotifications.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubNotifications.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GitHubNotifications/Pods-GitHubNotifications.debug.xcconfig"; sourceTree = "<group>"; };
 		8C4FCAF87D505E39DFBDB460 /* libPods-GitHubNotifications.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GitHubNotifications.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		98B0F4AB79E275E70C4CF160 /* Pods-GitHubNotifications.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubNotifications.release.xcconfig"; path = "Pods/Target Support Files/Pods-GitHubNotifications/Pods-GitHubNotifications.release.xcconfig"; sourceTree = "<group>"; };
+		B066974D1D1B95A12C59CDF8 /* libPods-GitHubNotificationTodayExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GitHubNotificationTodayExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD99934346C3A35480DFFB1A /* Pods-GitHubNotificationTodayExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubNotificationTodayExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-GitHubNotificationTodayExtension/Pods-GitHubNotificationTodayExtension.release.xcconfig"; sourceTree = "<group>"; };
+		D7EBDB8F4975D86C56C0EAE0 /* Pods-GitHubNotifications.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubNotifications.release.xcconfig"; path = "Pods/Target Support Files/Pods-GitHubNotifications/Pods-GitHubNotifications.release.xcconfig"; sourceTree = "<group>"; };
+		D93FF3531289177A27CA3070 /* Pods-GitHubNotificationTodayExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitHubNotificationTodayExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GitHubNotificationTodayExtension/Pods-GitHubNotificationTodayExtension.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				210E2FB238157FE168F524FB /* libPods-GitHubNotifications.a in Frameworks */,
+				44BB6B30770C8D41144FCB9E /* libPods-GitHubNotifications.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +119,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50D7C8ED1DE920A800927FB9 /* NotificationCenter.framework in Frameworks */,
+				7BB1ECB1C1F34380DB65FE0C /* libPods-GitHubNotificationTodayExtension.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +133,37 @@
 				5027B4691DE9322300AE7D03 /* SCFollowerAndStarManager.m */,
 			);
 			name = Service;
+			sourceTree = "<group>";
+		};
+		5027B4701DE9854F00AE7D03 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				5027B4711DE9856C00AE7D03 /* SCNetworkManager.h */,
+				5027B4721DE9856C00AE7D03 /* SCNetworkManager.m */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
+		5027B4751DE9C80000AE7D03 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				5027B4761DE9C80600AE7D03 /* GitHubAuth */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		5027B4761DE9C80600AE7D03 /* GitHubAuth */ = {
+			isa = PBXGroup;
+			children = (
+				5027B4831DE9C84400AE7D03 /* Defines.h */,
+				5027B4771DE9C82300AE7D03 /* GithubAuthController.h */,
+				5027B4781DE9C82300AE7D03 /* GithubAuthController.m */,
+				5027B4791DE9C82300AE7D03 /* GithubAuthenticatorView.h */,
+				5027B47A1DE9C82300AE7D03 /* GithubAuthenticatorView.m */,
+				5027B47B1DE9C82300AE7D03 /* NSDictionary+UrlEncoding.h */,
+				5027B47C1DE9C82300AE7D03 /* NSDictionary+UrlEncoding.m */,
+			);
+			name = GitHubAuth;
 			sourceTree = "<group>";
 		};
 		507666EB1DE88FFC004291F8 = {
@@ -135,6 +189,7 @@
 		507666F61DE88FFC004291F8 /* GitHubNotifications */ = {
 			isa = PBXGroup;
 			children = (
+				5027B4751DE9C80000AE7D03 /* Service */,
 				50BEB9A71DE898E6005A06B8 /* Utils */,
 				50BEB9A01DE89287005A06B8 /* ViewControllers */,
 				507666FA1DE88FFC004291F8 /* AppDelegate.h */,
@@ -179,6 +234,7 @@
 		50D7C8EE1DE920A800927FB9 /* GitHubNotificationTodayExtension */ = {
 			isa = PBXGroup;
 			children = (
+				5027B4701DE9854F00AE7D03 /* Network */,
 				5027B4671DE931DE00AE7D03 /* Service */,
 				50D7C9011DE922F400927FB9 /* Models */,
 				50D7C8FD1DE9222200927FB9 /* Views */,
@@ -197,6 +253,8 @@
 				50D7C8FF1DE922A000927FB9 /* SCGraphView.m */,
 				50D7C9021DE9230600927FB9 /* SCItemView.h */,
 				50D7C9031DE9230600927FB9 /* SCItemView.m */,
+				5027B46C1DE9854000AE7D03 /* SCStarGraphView.h */,
+				5027B46D1DE9854000AE7D03 /* SCStarGraphView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -211,8 +269,10 @@
 		5BA9ADA1E5816D378B3352DA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				03BE628B079756275D0CB952 /* Pods-GitHubNotifications.debug.xcconfig */,
-				98B0F4AB79E275E70C4CF160 /* Pods-GitHubNotifications.release.xcconfig */,
+				D93FF3531289177A27CA3070 /* Pods-GitHubNotificationTodayExtension.debug.xcconfig */,
+				CD99934346C3A35480DFFB1A /* Pods-GitHubNotificationTodayExtension.release.xcconfig */,
+				67771657903971DE2A1A9D3F /* Pods-GitHubNotifications.debug.xcconfig */,
+				D7EBDB8F4975D86C56C0EAE0 /* Pods-GitHubNotifications.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -222,6 +282,7 @@
 			children = (
 				8C4FCAF87D505E39DFBDB460 /* libPods-GitHubNotifications.a */,
 				50D7C8EC1DE920A800927FB9 /* NotificationCenter.framework */,
+				B066974D1D1B95A12C59CDF8 /* libPods-GitHubNotificationTodayExtension.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -233,13 +294,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5076670B1DE88FFC004291F8 /* Build configuration list for PBXNativeTarget "GitHubNotifications" */;
 			buildPhases = (
-				D91FDA82BAF0C0D4CB590FEC /* [CP] Check Pods Manifest.lock */,
+				79A7173C7A659FED6021D641 /* [CP] Check Pods Manifest.lock */,
 				507666F01DE88FFC004291F8 /* Sources */,
 				507666F11DE88FFC004291F8 /* Frameworks */,
 				507666F21DE88FFC004291F8 /* Resources */,
-				5F9C94EE013D5D88B7249B76 /* [CP] Embed Pods Frameworks */,
-				03A6CB6868D070353EA8A697 /* [CP] Copy Pods Resources */,
 				50D7C8FC1DE920A800927FB9 /* Embed App Extensions */,
+				D23892C45305E881581BD335 /* [CP] Embed Pods Frameworks */,
+				5344F485ABEA212A4E6C4AEA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -255,9 +316,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50D7C8F91DE920A800927FB9 /* Build configuration list for PBXNativeTarget "GitHubNotificationTodayExtension" */;
 			buildPhases = (
+				C6B04986DE96FFA6BE1C690F /* [CP] Check Pods Manifest.lock */,
 				50D7C8E71DE920A800927FB9 /* Sources */,
 				50D7C8E81DE920A800927FB9 /* Frameworks */,
 				50D7C8E91DE920A800927FB9 /* Resources */,
+				4F412659DFB57D513238D622 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -335,7 +398,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		03A6CB6868D070353EA8A697 /* [CP] Copy Pods Resources */ = {
+		4F412659DFB57D513238D622 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GitHubNotificationTodayExtension/Pods-GitHubNotificationTodayExtension-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5344F485ABEA212A4E6C4AEA /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -350,22 +428,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GitHubNotifications/Pods-GitHubNotifications-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5F9C94EE013D5D88B7249B76 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GitHubNotifications/Pods-GitHubNotifications-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D91FDA82BAF0C0D4CB590FEC /* [CP] Check Pods Manifest.lock */ = {
+		79A7173C7A659FED6021D641 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -380,6 +443,36 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		C6B04986DE96FFA6BE1C690F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D23892C45305E881581BD335 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GitHubNotifications/Pods-GitHubNotifications-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -387,6 +480,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5027B47D1DE9C82300AE7D03 /* GithubAuthController.m in Sources */,
+				5027B4731DE9856C00AE7D03 /* SCNetworkManager.m in Sources */,
+				5027B47F1DE9C82300AE7D03 /* NSDictionary+UrlEncoding.m in Sources */,
+				5027B46E1DE9854000AE7D03 /* SCStarGraphView.m in Sources */,
+				5027B47E1DE9C82300AE7D03 /* GithubAuthenticatorView.m in Sources */,
 				507666FC1DE88FFC004291F8 /* AppDelegate.m in Sources */,
 				507666F91DE88FFC004291F8 /* main.m in Sources */,
 				50BEB9A61DE898E0005A06B8 /* Reachability.m in Sources */,
@@ -403,8 +501,10 @@
 				50D7C8F11DE920A800927FB9 /* TodayViewController.m in Sources */,
 				50D7C9001DE922A000927FB9 /* SCGraphView.m in Sources */,
 				5027B46B1DE9322300AE7D03 /* SCFollowerAndStarManager.m in Sources */,
+				5027B46F1DE9854000AE7D03 /* SCStarGraphView.m in Sources */,
 				50D7C9041DE9230600927FB9 /* SCItemView.m in Sources */,
 				5027B4661DE927F500AE7D03 /* UIView+ViewFrameGeometry.m in Sources */,
+				5027B4741DE9856C00AE7D03 /* SCNetworkManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,7 +636,7 @@
 		};
 		5076670C1DE88FFC004291F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03BE628B079756275D0CB952 /* Pods-GitHubNotifications.debug.xcconfig */;
+			baseConfigurationReference = 67771657903971DE2A1A9D3F /* Pods-GitHubNotifications.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Q8H99663FH;
@@ -550,7 +650,7 @@
 		};
 		5076670D1DE88FFC004291F8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 98B0F4AB79E275E70C4CF160 /* Pods-GitHubNotifications.release.xcconfig */;
+			baseConfigurationReference = D7EBDB8F4975D86C56C0EAE0 /* Pods-GitHubNotifications.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Q8H99663FH;
@@ -564,6 +664,7 @@
 		};
 		50D7C8FA1DE920A800927FB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D93FF3531289177A27CA3070 /* Pods-GitHubNotificationTodayExtension.debug.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = Q8H99663FH;
 				INFOPLIST_FILE = GitHubNotificationTodayExtension/Info.plist;
@@ -577,6 +678,7 @@
 		};
 		50D7C8FB1DE920A800927FB9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD99934346C3A35480DFFB1A /* Pods-GitHubNotificationTodayExtension.release.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = Q8H99663FH;
 				INFOPLIST_FILE = GitHubNotificationTodayExtension/Info.plist;

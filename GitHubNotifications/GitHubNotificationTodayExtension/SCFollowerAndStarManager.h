@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#define SCSharedDataGroupKey @"group.sergio.chan.GitHubNotification"
 
 @interface SCFollowerAndStarManager : NSObject
+
++ (id)sharedManager;
+- (void)refreshData;
 
 @end
