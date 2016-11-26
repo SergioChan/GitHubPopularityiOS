@@ -89,13 +89,6 @@
     UIButton *button = (UIButton *)sender;
     [button setTitle:@"Authenticating ... " forState:UIControlStateNormal];
     [self checkGitAuth];
-    
-//    [[[NSUserDefaults alloc] initWithSuiteName:@"group.sergio.chan.GitHubNotification"] setObject:trimmedName forKey:@"GitHubNotificationsName"];
-//    
-//    UIButton *button = (UIButton *)sender;
-//    [[[NSUserDefaults alloc] initWithSuiteName:@"group.sergio.chan.GitHubNotification"] removeObjectForKey:@"GitHubNotificationsArray"];
-//    
-//    [button setTitle:@"Widget will update soon" forState:UIControlStateNormal];
 }
 
 -(void) checkGitAuth
@@ -115,12 +108,19 @@
     };
 }
 
--(void) didAuth:(NSString*)token
+- (void)didAuth:(NSString *)token
 {
-    if(!token)
-    {
-        return;
-    }
+    if(!token) return;
+
+    NSString *trimmedName = [_userNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    [[[NSUserDefaults alloc] initWithSuiteName:@"group.sergio.chan.GitHubNotification"] setObject:trimmedName forKey:@"GitHubNotificationsName"];
+
+    [[[NSUserDefaults alloc] initWithSuiteName:@"group.sergio.chan.GitHubNotification"] setObject:token forKey:@"GitHubNotificationsToken"];
+    
+    [[[NSUserDefaults alloc] initWithSuiteName:@"group.sergio.chan.GitHubNotification"] removeObjectForKey:@"GitHubNotificationsArray"];
+
+    [_updateInfoButton setTitle:@"Widget will update soon" forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {
