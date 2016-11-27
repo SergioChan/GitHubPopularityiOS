@@ -13,6 +13,7 @@
 @interface SCGraphView()
 {
     NSInteger numberOfColumns;
+    NSMutableArray *itemArray;
 }
 @property (strong, nonatomic) NSMutableArray *itemArray;
 
@@ -48,21 +49,32 @@
     [_itemArray removeAllObjects];
     
     CGFloat nextX = 0.0f;
-    CGFloat nextHeight = 0.1f;
+
     for (NSInteger i = 0; i < numberOfColumns; i++) {
         SCItemView *item = [[SCItemView alloc] initWithItemWidth:self.width/numberOfColumns maximunHeight:self.height];
+        
+        CGFloat relHeight = 0.0f;
+        if (i >= [itemArray count]) {
+            relHeight = 0.0f;
+        } else {
+            relHeight = [[itemArray objectAtIndex:i] floatValue];
+        }
+        
         item.index = i;
         item.left = nextX;
-        item.relativeHeight = nextHeight;
-//        item.height = nextHeight * self.height;
+        item.relativeHeight = relHeight;
         item.bottom = self.height;
-//        item.backgroundColor = [UIColor colorWithWhite:(1.0f - nextHeight) alpha:1.0f];
         
         [self addSubview:item];
         [self.itemArray addObject:item];
         
         nextX += self.width/numberOfColumns;
-        nextHeight += 0.9f / numberOfColumns;
     }
+}
+
+- (void)refreshWithFollwers:(NSArray *)dayArray
+{
+    itemArray = [dayArray mutableCopy];
+    [self layoutItems];
 }
 @end

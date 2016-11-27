@@ -11,5 +11,6 @@
 @interface SCGraphView : UIView
 
 - (id)initWithFrame:(CGRect)frame columns:(NSInteger)columns;
+- (void)refreshWithFollwers:(NSArray *)dayArray;
 
 @end

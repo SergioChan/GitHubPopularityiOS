@@ -61,7 +61,7 @@
     }
 
     self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
-
+    
     [self updateGraphViewWithData:[[SCDefaultsManager sharedManager] getRenderStarArray]];
     
     // Do any additional setup after loading the view from its nib.
@@ -71,6 +71,12 @@
 {
     [super viewWillAppear:animated];
 //    [[SCFollowerAndStarManager sharedManager] refreshData];
+}
+
+- (void)updateFollowerGraphViewWithData:(NSDictionary *)folData
+{
+    NSDate *now = [NSDate date];
+    // Fuck TODO:
 }
 
 - (void)updateGraphViewWithData:(NSArray *)starData
@@ -194,10 +200,15 @@
         [UIView animateWithDuration:0.2
                          animations:^{
                              [self.view layoutIfNeeded]; // Called on parent view
+                         } completion:^(BOOL finished) {
+                             [_followerGraphView removeFromSuperview];
                          }];
     }
     else {
         self.preferredContentSize = CGSizeMake(0, 200.0);
+        [self updateFollowerGraphViewWithData:[[SCDefaultsManager sharedManager] getRenderFollowersDict]];
+        [self.view addSubview:_followerGraphView];
+
         [UIView animateWithDuration:0.2
                          animations:^{
                              [self.view layoutIfNeeded]; // Called on parent view
