@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface SCStar : NSObject
 
 @property (nonatomic, strong) NSDate *date;
-@property (nonatomic) NSInteger value;
+@property (nonatomic, strong) UIColor *color;
+@property (nonatomic, strong) NSNumber *weekDay;
+@property (nonatomic, strong) NSNumber *month;
 
 @end

@@ -10,9 +10,12 @@
 #import "UIView+ViewFrameGeometry.h"
 #import "GithubAuthController.h"
 #import "SCDefaultsManager.h"
+#import "SCFollowerAndStarManager.h"
 
-@interface SCMainViewController () <UITextFieldDelegate,GitAuthDelegate>
-
+@interface SCMainViewController () <UITextFieldDelegate,GitAuthDelegate,SCFollowerAndStarDelegate>
+{
+    BOOL isRefreshing;
+}
 @property (weak, nonatomic) IBOutlet UITextField *userNameField;
 @property (weak, nonatomic) IBOutlet UIButton *updateInfoButton;
 
@@ -27,6 +30,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    isRefreshing = NO;
+    
     // Do any additional setup after loading the view.
     _userNameField.tintColor = [UIColor whiteColor];
     
@@ -80,11 +85,17 @@
 }
 
 - (IBAction)updateInfoButtonPressed:(id)sender {
+    if (isRefreshing) {
+        return;
+    }
+    
     NSString *trimmedName = [_userNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     if ([trimmedName isEqualToString:@"Your User Name"] || [trimmedName isEqualToString:@""]) {
         return;
     }
+    
+    [[SCDefaultsManager sharedManager] clearCache];
     
     UIButton *button = (UIButton *)sender;
     [button setTitle:@"Authenticating ... " forState:UIControlStateNormal];
@@ -120,8 +131,12 @@
     [[SCDefaultsManager sharedManager] setUserToken:token];
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        [_updateInfoButton setTitle:@"Widget will update soon" forState:UIControlStateNormal];
+        [_updateInfoButton setTitle:@"Syncronizing data ... \nPlease wait ..." forState:UIControlStateNormal];
     });
+
+    [[SCFollowerAndStarManager sharedManager] refreshData];
+    isRefreshing = YES;
+    [[SCFollowerAndStarManager sharedManager] setDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -132,6 +147,25 @@
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
+}
+
+#pragma mark - FollowerAndStarDelegate
+
+- (void)didFinishUpdatingRepo:(NSString *)repoName
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_updateInfoButton setTitle:[NSString stringWithFormat:@"Syncronizing data ... \n- %@ - Finished",repoName] forState:UIControlStateNormal];
+    });
+}
+
+- (void)didFinishUpdatingStarData:(NSArray *)starData
+{
+    NSLog(@"didFinishUpdatingStarData %ld",starData.count);
+    [[SCDefaultsManager sharedManager] setRenderStarArray:starData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_updateInfoButton setTitle:@"Syncronizing finished" forState:UIControlStateNormal];
+    });
+    isRefreshing = NO;
 }
 
 /*

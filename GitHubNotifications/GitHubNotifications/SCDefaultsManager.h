@@ -25,11 +25,20 @@
 - (NSArray *)getStarArray;
 
 // FollowersArray : Array -> [(SCFollower)]
-- (void)setFollowersArray:(NSArray *)data;
-- (NSArray *)getFollowersArray;
+- (void)setFollowersNumber:(NSInteger)data;
+- (NSInteger)getFollowersNumber;
 
 // RepoArray : Dict -> repo:{cached(BOOL)}
 - (void)setRepoCached:(BOOL)cached repoName:(NSString *)repo;
 - (NSMutableDictionary *)getRepoCachedDict;
+- (BOOL)isRepoCached:(NSString *)repoName;
+
+- (void)setRenderStarArray:(NSArray *)data;
+- (NSArray *)getRenderStarArray;
+
+- (void)addDeltaToRenderFollowersDict:(NSInteger)delta toKey:(NSString *)key;
+- (NSDictionary *)getRenderFollowersDict;
+
+- (void)clearCache;
 
 @end

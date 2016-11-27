@@ -8,8 +8,10 @@
 
 #import "AppDelegate.h"
 #import "Reachability.h"
+#import "SCFollowerAndStarManager.h"
+#import "SCDefaultsManager.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <SCFollowerAndStarDelegate>
 
 @property (nonatomic) Reachability *hostReachability;
 
@@ -88,26 +90,19 @@
         }
     }
     
-    NSMutableArray * array = [NSMutableArray arrayWithObjects:@"fuck",@"fuckkk",nil];
-    if (array)
-    {
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:array] ;
-        [[[NSUserDefaults alloc] initWithSuiteName:@"group.sergio.chan.GitHubNotification"] setObject:data forKey:@"GitHubNotificationsArray"];
-        if ([[[NSUserDefaults alloc] initWithSuiteName:@"group.sergio.chan.GitHubNotification"] synchronize])
-        {
-            NSLog(@"UIBackgroundFetchResultNewData");
-            completionHandler(UIBackgroundFetchResultNewData);
-        }else
-        {
-            NSLog(@"UIBackgroundFetchResultFailed");
-            completionHandler(UIBackgroundFetchResultFailed);
-        }
-    }
-    else
-    {
-        NSLog(@"UIBackgroundFetchResultFailed");
+    if ([[[SCDefaultsManager sharedManager] getUserName] isEqualToString:@""] || [[[SCDefaultsManager sharedManager] getUserToken] isEqualToString:@""]) {
+        NSLog(@"no name or token specified!");
         completionHandler(UIBackgroundFetchResultFailed);
     }
+    
+    [[SCFollowerAndStarManager sharedManager] refreshData];
+    [[SCFollowerAndStarManager sharedManager] setCompletionBlock:^(id object){
+        NSLog(@"didFinishUpdatingStarData %ld",[object count]);
+        [[SCDefaultsManager sharedManager] setRenderStarArray:object];
+        completionHandler(UIBackgroundFetchResultNewData);
+    }];
+    
+//    completionHandler(UIBackgroundFetchResultFailed);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

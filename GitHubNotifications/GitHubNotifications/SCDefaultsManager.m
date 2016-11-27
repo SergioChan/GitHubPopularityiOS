@@ -12,6 +12,8 @@
 #define KEY_STAR_ARRAY      @"GitHubNotificationsStar"
 #define KEY_FOLLOWER_ARRAY  @"GitHubNotificationsFollower"
 #define KEY_REPO_DICT       @"GitHubNotificationsRepo"
+#define KEY_RENDER_STAR_ARRAY      @"GitHubNotificationsRenderStar"
+#define KEY_RENDER_FOLLOWER_ARRAY  @"GitHubNotificationsRenderFollower"
 
 @interface SCDefaultsManager()
 
@@ -54,6 +56,13 @@
     }
 }
 
+- (void)clearCache
+{
+    [_groupDefaults setObject:@[] forKey:KEY_STAR_ARRAY];
+    [_groupDefaults setObject:@[] forKey:KEY_FOLLOWER_ARRAY];
+    [_groupDefaults setObject:@{} forKey:KEY_REPO_DICT];
+}
+
 - (void)setUserToken:(NSString *)token
 {
     [_groupDefaults setObject:token forKey:KEY_TOKEN];
@@ -84,17 +93,55 @@
     }
 }
 
-- (void)setFollowersArray:(NSArray *)data
+- (void)setFollowersNumber:(NSInteger)data
 {
-    [_groupDefaults setObject:data forKey:KEY_FOLLOWER_ARRAY];
+    [_groupDefaults setObject:@(data) forKey:KEY_FOLLOWER_ARRAY];
 }
 
-- (NSArray *)getFollowersArray
+- (NSInteger)getFollowersNumber
 {
     if ([_groupDefaults objectForKey:KEY_FOLLOWER_ARRAY]) {
-        return [_groupDefaults objectForKey:KEY_FOLLOWER_ARRAY];
+        return [[_groupDefaults objectForKey:KEY_FOLLOWER_ARRAY] integerValue];
     } else {
-        [_groupDefaults setObject:@[] forKey:KEY_FOLLOWER_ARRAY];
+        [_groupDefaults setObject:@(-1) forKey:KEY_FOLLOWER_ARRAY];
+        return -1;
+    }
+}
+
+- (void)addDeltaToRenderFollowersDict:(NSInteger)delta toKey:(NSString *)key
+{
+    NSMutableDictionary *dict = [[self getRenderFollowersDict] mutableCopy];
+    if ([dict objectForKey:key]) {
+        NSInteger tmp = [[dict objectForKey:key] integerValue];
+        [dict setValue:@(tmp + delta) forKey:key];
+        [_groupDefaults setObject:dict forKey:KEY_RENDER_FOLLOWER_ARRAY];
+    } else {
+        [dict setObject:@(0 + delta) forKey:key];
+        [_groupDefaults setObject:dict forKey:KEY_RENDER_FOLLOWER_ARRAY];
+    }
+}
+
+- (NSDictionary *)getRenderFollowersDict
+{
+    if ([_groupDefaults objectForKey:KEY_RENDER_FOLLOWER_ARRAY]) {
+        return [_groupDefaults objectForKey:KEY_RENDER_FOLLOWER_ARRAY];
+    } else {
+        [_groupDefaults setObject:@{} forKey:KEY_RENDER_FOLLOWER_ARRAY];
+        return @{};
+    }
+}
+
+- (void)setRenderStarArray:(NSArray *)data
+{
+    [_groupDefaults setObject:data forKey:KEY_RENDER_STAR_ARRAY];
+}
+
+- (NSArray *)getRenderStarArray
+{
+    if ([_groupDefaults objectForKey:KEY_RENDER_STAR_ARRAY]) {
+        return [_groupDefaults objectForKey:KEY_RENDER_STAR_ARRAY];
+    } else {
+        [_groupDefaults setObject:@[] forKey:KEY_RENDER_STAR_ARRAY];
         return @[];
     }
 }
@@ -115,4 +162,18 @@
         return [NSMutableDictionary dictionary];
     }
 }
+
+- (BOOL)isRepoCached:(NSString *)repoName
+{
+    if ([_groupDefaults objectForKey:KEY_REPO_DICT]) {
+        if ([[_groupDefaults objectForKey:KEY_REPO_DICT] objectForKey:repoName]) {
+            return [[[_groupDefaults objectForKey:KEY_REPO_DICT] objectForKey:repoName] boolValue];
+        } else {
+            return NO;
+        }
+    } else {
+        return NO;
+    }
+}
+
 @end

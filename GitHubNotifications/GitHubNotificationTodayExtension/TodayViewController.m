@@ -12,15 +12,20 @@
 #import "UIView+ViewFrameGeometry.h"
 #import "SCFollowerAndStarManager.h"
 #import "SCDefaultsManager.h"
+#import "SCStarGraphView.h"
+#import "SCStar.h"
+#import "DateTools.h"
 
 @interface TodayViewController () <NCWidgetProviding>
 {
     BOOL accountHasSet;
     NSString *userName;
     NSString *userToken;
+    NSArray *starDataArray;
 }
 
 @property (nonatomic, strong) SCGraphView *followerGraphView;
+@property (nonatomic, strong) SCStarGraphView *starGraphView;
 
 @end
 
@@ -30,8 +35,11 @@
     [super viewDidLoad];
     accountHasSet = NO;
     
-    _followerGraphView = [[SCGraphView alloc] initWithFrame:CGRectMake(5.0f, 10.0f, self.view.width - 30.0f, 100.0f) columns:24];
-    [self.view addSubview:_followerGraphView];
+    _followerGraphView = [[SCGraphView alloc] initWithFrame:CGRectMake(5.0f, 110.0f, self.view.width - 30.0f, 100.0f) columns:24];
+//    [self.view addSubview:_followerGraphView];
+    
+    _starGraphView = [[SCStarGraphView alloc] initWithFrame:CGRectMake(5.0f, 5.0f, self.view.width - 30.0f, 100.0f)];
+    [self.view addSubview:_starGraphView];
     
     UIButton *tapToSetButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, 100.0f)];
     tapToSetButton.backgroundColor = [UIColor clearColor];
@@ -46,20 +54,113 @@
     
     if ([userName isEqualToString:@""] || [userToken isEqualToString:@""]) {
         _followerGraphView.alpha = 0.0f;
+        _starGraphView.alpha = 0.0f;
         [self.view addSubview:tapToSetButton];
     } else {
         accountHasSet = YES;
     }
-    
+
     self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
 
+    [self updateGraphViewWithData:[[SCDefaultsManager sharedManager] getRenderStarArray]];
+    
     // Do any additional setup after loading the view from its nib.
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[SCFollowerAndStarManager sharedManager] refreshData];
+//    [[SCFollowerAndStarManager sharedManager] refreshData];
+}
+
+- (void)updateGraphViewWithData:(NSArray *)starData
+{
+    NSMutableDictionary *tempDictionary = [NSMutableDictionary dictionary];
+    
+    for (NSDictionary *item in starData) {
+        NSDate *date = [item objectForKey:@"date"];
+        NSString *key = [NSString stringWithFormat:@"%ld-%ld-%ld",date.year,date.month,date.day];
+        if ([tempDictionary objectForKey:key]) {
+            NSInteger tmp = [[tempDictionary objectForKey:key] integerValue];
+            if (tmp <= 99) {
+                [tempDictionary setValue:@(tmp + 1) forKey:key];
+            }
+        } else {
+            [tempDictionary setValue:@(1) forKey:key];
+        }
+    }
+    // Sort all date values into a dictionary with same date string key
+    
+    NSMutableArray *stars = [NSMutableArray array];
+    
+    NSDate *today = [NSDate date];
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *components = [cal components:(NSCalendarUnitDay) fromDate:today];
+    [components setDay:1];
+    
+    NSInteger weekDay = today.weekday;
+    NSMutableArray * thisWeekArray = [NSMutableArray array];
+    for (int weekDayIndex = 1; weekDayIndex <= weekDay; weekDayIndex ++)
+    {
+        [components setDay: - (weekDay - weekDayIndex)];
+        NSDate *date = [cal dateByAddingComponents:components toDate:today options:0];
+        NSString *key = [NSString stringWithFormat:@"%ld-%ld-%ld",date.year,date.month,date.day];
+        
+        SCStar *star = [[SCStar alloc] init];
+        CGFloat value = [[tempDictionary objectForKey:key] integerValue] / 10.0f;
+        if (value > 1.0f) {
+            value = 1.0f;
+        }
+        
+        star.color = [self colorForValue:value];
+        star.date = date;
+        star.weekDay = [NSNumber numberWithInteger:date.weekday];
+        star.month = [NSNumber numberWithInteger:date.month];
+        [thisWeekArray addObject:star];
+    }
+    [stars addObject:thisWeekArray];
+    
+    for (int weekFromNow = 0; weekFromNow < 30; weekFromNow ++)
+    {
+        NSMutableArray * thatWeekArray = [NSMutableArray array];
+        for (int weekDayIndex = 1; weekDayIndex <= 7; weekDayIndex ++)
+        {
+            [components setDay: - (weekFromNow * 7 + weekDay - weekDayIndex + 7)];
+            NSDate *date = [cal dateByAddingComponents:components toDate:today options:0];
+            NSString *key = [NSString stringWithFormat:@"%ld-%ld-%ld",date.year,date.month,date.day];
+            
+            SCStar *star = [[SCStar alloc] init];
+            CGFloat value = [[tempDictionary objectForKey:key] integerValue] / 10.0f;
+            if (value > 1.0f) {
+                value = 1.0f;
+            }
+            
+            star.color = [self colorForValue:value];
+            star.date = date;
+            star.weekDay = [NSNumber numberWithInteger:date.weekday];
+            star.month = [NSNumber numberWithInteger:date.month];
+            [thatWeekArray addObject:star];
+        }
+        [stars addObject:thatWeekArray];
+    }
+    [self.starGraphView refreshFromStars:stars];
+    
+    starDataArray = starData;
+}
+
+- (UIColor *)colorForValue:(CGFloat)value
+{
+    if (value == 1.0f) {
+        return [UIColor colorWithRed:85/255.0f green:68/255.0f blue:0.0f alpha:1.0f];
+    } else if (value < 1.0f && value >= 0.7f) {
+        return [UIColor colorWithRed:128/255.0f green:107/255.0f blue:21/255.0f alpha:1.0f];
+    } else if (value < 0.7f && value >= 0.3f) {
+        return [UIColor colorWithRed:212/255.0f green:191/255.0f blue:106/255.0f alpha:1.0f];
+    } else if (value < 0.3f && value > 0.0f) {
+        return [UIColor colorWithRed:255/255.0f green:238/255.0f blue:170/255.0f alpha:1.0f];
+    } else  {
+        return [UIColor whiteColor];
+    }
 }
 
 - (void)goSettingsButtonPressed:(id)sender

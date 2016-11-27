@@ -9,6 +9,11 @@
 #import "SCNetworkManager.h"
 #import "SCDefaultsManager.h"
 
+@interface SCNetworkManager()
+
+@property (nonatomic, strong) NSDateFormatter *formater;
+@end
+
 @implementation SCNetworkManager
 
 + (id)sharedManager {
@@ -24,7 +29,8 @@
 {
     self = [super init];
     if (self) {
-        
+        self.formater = [[NSDateFormatter alloc] init];
+        [_formater setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     }
     return self;
 }
@@ -94,8 +100,28 @@
     
     [self sendRequest:req
          successBlock: ^(id object, NSURLResponse *response) {
-             onSuccess(object,response);
+             if ([object isKindOfClass:[NSArray class]]) {
+                 NSMutableArray *result = [NSMutableArray array];
+                 for (NSDictionary *item in object) {
+                     NSDate *starDate =[self convertDateStringToDate:[item objectForKey:@"starred_at"]];
+//                     if ([starDate timeIntervalSinceNow] > - 60 * 60 * 24 * 220) {
+                        [result addObject:@{@"date":starDate,@"userName":[[item objectForKey:@"user"] objectForKey:@"login"],@"repo":repo}];
+//                     }
+                 }
+                 onSuccess(result,response);
+             } else {
+                 NSError *error = [[NSError alloc] initWithDomain:@"sergio.chan.GitHubNotifications" code:-1000 userInfo:nil];
+                 onFailure(error);
+             }
          } failureBlock:onFailure];
+}
+
+- (NSDate *)convertDateStringToDate:(NSString *)dateString
+{
+    dateString = [dateString stringByReplacingOccurrencesOfString:@"T" withString:@" "];
+    dateString = [dateString stringByReplacingOccurrencesOfString:@"Z" withString:@""];
+    NSDate* date = [_formater dateFromString:dateString];
+    return date;
 }
 
 - (void)sendRequest:(NSMutableURLRequest *)req

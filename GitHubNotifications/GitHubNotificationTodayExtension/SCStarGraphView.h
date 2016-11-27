@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SCStarGraphView : UIView
+@interface SCStarGraphView : UIImageView
+
+- (void)refreshFromStars:(NSMutableArray *)array;
 
 @end

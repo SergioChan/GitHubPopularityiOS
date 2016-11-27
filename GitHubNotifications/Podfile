@@ -3,6 +3,7 @@ platform :ios, '9.0'
 
 target 'GitHubNotifications' do
 pod 'AFNetworking', '~> 3.0'
+pod 'DateTools'
 end
 
 target 'GitHubNotificationTodayExtension' do
@@ -10,5 +11,5 @@ target 'GitHubNotificationTodayExtension' do
   # use_frameworks!
 pod 'AFNetworking', '~> 3.0'
   # Pods for GitHubNotifications
-
+pod 'DateTools'
 end
