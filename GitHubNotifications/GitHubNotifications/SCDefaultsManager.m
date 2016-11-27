@@ -11,6 +11,7 @@
 #define KEY_TOKEN           @"GitHubNotificationsToken"
 #define KEY_STAR_ARRAY      @"GitHubNotificationsStar"
 #define KEY_FOLLOWER_ARRAY  @"GitHubNotificationsFollower"
+#define KEY_REPO_DICT       @"GitHubNotificationsRepo"
 
 @interface SCDefaultsManager()
 
@@ -95,6 +96,23 @@
     } else {
         [_groupDefaults setObject:@[] forKey:KEY_FOLLOWER_ARRAY];
         return @[];
+    }
+}
+
+- (void)setRepoCached:(BOOL)cached repoName:(NSString *)repo
+{
+    NSMutableDictionary *dict = [self getRepoCachedDict];
+    [dict setObject:@(cached) forKey:repo];
+    [_groupDefaults setObject:dict forKey:KEY_REPO_DICT];
+}
+
+- (NSMutableDictionary *)getRepoCachedDict
+{
+    if ([_groupDefaults objectForKey:KEY_REPO_DICT]) {
+        return [[_groupDefaults objectForKey:KEY_REPO_DICT] mutableCopy];
+    } else {
+        [_groupDefaults setObject:@{} forKey:KEY_REPO_DICT];
+        return [NSMutableDictionary dictionary];
     }
 }
 @end
