@@ -21,6 +21,10 @@
 		5027B47F1DE9C82300AE7D03 /* NSDictionary+UrlEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B47C1DE9C82300AE7D03 /* NSDictionary+UrlEncoding.m */; };
 		5027B4861DEA709A00AE7D03 /* SCDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B4851DEA709A00AE7D03 /* SCDefaultsManager.m */; };
 		5027B4871DEA712600AE7D03 /* SCDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B4851DEA709A00AE7D03 /* SCDefaultsManager.m */; };
+		5027B48C1DEACC5D00AE7D03 /* SCStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B48B1DEACC5D00AE7D03 /* SCStar.m */; };
+		5027B48D1DEACC5D00AE7D03 /* SCStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B48B1DEACC5D00AE7D03 /* SCStar.m */; };
+		5027B4901DEACC6D00AE7D03 /* SCFollower.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B48F1DEACC6D00AE7D03 /* SCFollower.m */; };
+		5027B4911DEACC6D00AE7D03 /* SCFollower.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B48F1DEACC6D00AE7D03 /* SCFollower.m */; };
 		507666F91DE88FFC004291F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 507666F81DE88FFC004291F8 /* main.m */; };
 		507666FC1DE88FFC004291F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 507666FB1DE88FFC004291F8 /* AppDelegate.m */; };
 		507667021DE88FFC004291F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 507667001DE88FFC004291F8 /* Main.storyboard */; };
@@ -81,6 +85,10 @@
 		5027B4851DEA709A00AE7D03 /* SCDefaultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDefaultsManager.m; sourceTree = "<group>"; };
 		5027B4881DEA74E500AE7D03 /* GitHubNotificationTodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GitHubNotificationTodayExtension.entitlements; sourceTree = "<group>"; };
 		5027B4891DEA757400AE7D03 /* GitHubNotifications.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GitHubNotifications.entitlements; sourceTree = "<group>"; };
+		5027B48A1DEACC5D00AE7D03 /* SCStar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCStar.h; sourceTree = "<group>"; };
+		5027B48B1DEACC5D00AE7D03 /* SCStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCStar.m; sourceTree = "<group>"; };
+		5027B48E1DEACC6D00AE7D03 /* SCFollower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCFollower.h; sourceTree = "<group>"; };
+		5027B48F1DEACC6D00AE7D03 /* SCFollower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCFollower.m; sourceTree = "<group>"; };
 		507666F41DE88FFC004291F8 /* GitHubNotifications.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubNotifications.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		507666F81DE88FFC004291F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		507666FA1DE88FFC004291F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -272,6 +280,10 @@
 		50D7C9011DE922F400927FB9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5027B48A1DEACC5D00AE7D03 /* SCStar.h */,
+				5027B48B1DEACC5D00AE7D03 /* SCStar.m */,
+				5027B48E1DEACC6D00AE7D03 /* SCFollower.h */,
+				5027B48F1DEACC6D00AE7D03 /* SCFollower.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -503,7 +515,9 @@
 				5027B47F1DE9C82300AE7D03 /* NSDictionary+UrlEncoding.m in Sources */,
 				5027B4861DEA709A00AE7D03 /* SCDefaultsManager.m in Sources */,
 				5027B46E1DE9854000AE7D03 /* SCStarGraphView.m in Sources */,
+				5027B4901DEACC6D00AE7D03 /* SCFollower.m in Sources */,
 				5027B47E1DE9C82300AE7D03 /* GithubAuthenticatorView.m in Sources */,
+				5027B48C1DEACC5D00AE7D03 /* SCStar.m in Sources */,
 				507666FC1DE88FFC004291F8 /* AppDelegate.m in Sources */,
 				507666F91DE88FFC004291F8 /* main.m in Sources */,
 				50BEB9A61DE898E0005A06B8 /* Reachability.m in Sources */,
@@ -517,6 +531,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5027B48D1DEACC5D00AE7D03 /* SCStar.m in Sources */,
 				5027B4871DEA712600AE7D03 /* SCDefaultsManager.m in Sources */,
 				50D7C8F11DE920A800927FB9 /* TodayViewController.m in Sources */,
 				50D7C9001DE922A000927FB9 /* SCGraphView.m in Sources */,
@@ -525,6 +540,7 @@
 				50D7C9041DE9230600927FB9 /* SCItemView.m in Sources */,
 				5027B4661DE927F500AE7D03 /* UIView+ViewFrameGeometry.m in Sources */,
 				5027B4741DE9856C00AE7D03 /* SCNetworkManager.m in Sources */,
+				5027B4911DEACC6D00AE7D03 /* SCFollower.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

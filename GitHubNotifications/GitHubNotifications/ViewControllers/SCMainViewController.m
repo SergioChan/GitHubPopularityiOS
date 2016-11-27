@@ -23,7 +23,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [_updateInfoButton setTitle:@"Update Info" forState:UIControlStateNormal];
 }
 
 - (void)viewDidLoad {
@@ -120,7 +119,9 @@
     [[SCDefaultsManager sharedManager] setUserName:trimmedName];
     [[SCDefaultsManager sharedManager] setUserToken:token];
 
-    [_updateInfoButton setTitle:@"Widget will update soon" forState:UIControlStateNormal];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_updateInfoButton setTitle:@"Widget will update soon" forState:UIControlStateNormal];
+    });
 }
 
 - (void)didReceiveMemoryWarning {

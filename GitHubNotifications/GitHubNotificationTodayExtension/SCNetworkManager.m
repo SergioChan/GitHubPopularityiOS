@@ -7,6 +7,7 @@
 //
 
 #import "SCNetworkManager.h"
+#import "SCDefaultsManager.h"
 
 @implementation SCNetworkManager
 
@@ -32,7 +33,7 @@
                             success:(successWithObjectAndResponseBlock)onSuccess
                             failure:(failErrorBlock)onFailure
 {
-    NSMutableURLRequest *req = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"https://api.github.com/users/%@",userName] parameters:@{} error:nil];
+    NSMutableURLRequest *req = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"https://api.github.com/users/%@",userName] parameters:@{@"access_token":[[SCDefaultsManager sharedManager] getUserToken]} error:nil];
     
     // Add two HEADER
     [req setValue:userName forHTTPHeaderField:@"User-Agent"];
@@ -63,7 +64,7 @@
         page = 1;
     }
     
-    NSMutableURLRequest *req = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"https://api.github.com/users/%@/repos",userName] parameters:@{@"page":@(page),@"per_page":@(100)} error:nil];
+    NSMutableURLRequest *req = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"https://api.github.com/users/%@/repos",userName] parameters:@{@"page":@(page),@"per_page":@(100),@"access_token":[[SCDefaultsManager sharedManager] getUserToken]} error:nil];
     
     // Add two HEADER
     [req setValue:userName forHTTPHeaderField:@"User-Agent"];
@@ -85,7 +86,7 @@
         page = 1;
     }
     
-    NSMutableURLRequest *req = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/%@/stargazers",userName,repo] parameters:@{@"page":@(page),@"per_page":@(100)} error:nil];
+    NSMutableURLRequest *req = [[AFJSONRequestSerializer serializer] requestWithMethod:@"GET" URLString:[NSString stringWithFormat:@"https://api.github.com/repos/%@/%@/stargazers",userName,repo] parameters:@{@"page":@(page),@"per_page":@(100),@"access_token":[[SCDefaultsManager sharedManager] getUserToken]} error:nil];
     
     // Add two HEADER
     [req setValue:@"application/vnd.github.v3.star+json" forHTTPHeaderField:@"Accept"];

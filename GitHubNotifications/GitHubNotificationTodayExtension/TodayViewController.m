@@ -19,6 +19,9 @@
     NSString *userName;
     NSString *userToken;
 }
+
+@property (nonatomic, strong) SCGraphView *followerGraphView;
+
 @end
 
 @implementation TodayViewController
@@ -27,8 +30,8 @@
     [super viewDidLoad];
     accountHasSet = NO;
     
-    SCGraphView *fuck = [[SCGraphView alloc] initWithFrame:CGRectMake(5.0f, 10.0f, self.view.width - 30.0f, 100.0f) columns:24];
-    [self.view addSubview:fuck];
+    _followerGraphView = [[SCGraphView alloc] initWithFrame:CGRectMake(5.0f, 10.0f, self.view.width - 30.0f, 100.0f) columns:24];
+    [self.view addSubview:_followerGraphView];
     
     UIButton *tapToSetButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, 100.0f)];
     tapToSetButton.backgroundColor = [UIColor clearColor];
@@ -42,7 +45,7 @@
     userToken = [[SCDefaultsManager sharedManager] getUserToken];
     
     if ([userName isEqualToString:@""] || [userToken isEqualToString:@""]) {
-        fuck.alpha = 0.0f;
+        _followerGraphView.alpha = 0.0f;
         [self.view addSubview:tapToSetButton];
     } else {
         accountHasSet = YES;
@@ -51,6 +54,12 @@
     self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
 
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[SCFollowerAndStarManager sharedManager] refreshData];
 }
 
 - (void)goSettingsButtonPressed:(id)sender
