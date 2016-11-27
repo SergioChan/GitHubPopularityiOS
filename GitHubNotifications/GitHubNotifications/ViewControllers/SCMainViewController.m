@@ -9,6 +9,7 @@
 #import "SCMainViewController.h"
 #import "UIView+ViewFrameGeometry.h"
 #import "GithubAuthController.h"
+#import "SCDefaultsManager.h"
 
 @interface SCMainViewController () <UITextFieldDelegate,GitAuthDelegate>
 
@@ -33,8 +34,8 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [self.view addGestureRecognizer:tap];
     
-    NSString *name = [[[NSUserDefaults alloc] initWithSuiteName:@"group.sergio.chan.GitHubNotification"] objectForKey:@"GitHubNotificationsName"];
-    if (name)
+    NSString *name = [[SCDefaultsManager sharedManager] getUserName];
+    if (![name isEqualToString:@""])
     {
         _userNameField.text = name;
     }
@@ -112,13 +113,12 @@
 {
     if(!token) return;
 
+    NSLog(@"didAuth :%@",token);
+    
     NSString *trimmedName = [_userNameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    [[[NSUserDefaults alloc] initWithSuiteName:@"group.sergio.chan.GitHubNotification"] setObject:trimmedName forKey:@"GitHubNotificationsName"];
-
-    [[[NSUserDefaults alloc] initWithSuiteName:@"group.sergio.chan.GitHubNotification"] setObject:token forKey:@"GitHubNotificationsToken"];
-    
-    [[[NSUserDefaults alloc] initWithSuiteName:@"group.sergio.chan.GitHubNotification"] removeObjectForKey:@"GitHubNotificationsArray"];
+    [[SCDefaultsManager sharedManager] setUserName:trimmedName];
+    [[SCDefaultsManager sharedManager] setUserToken:token];
 
     [_updateInfoButton setTitle:@"Widget will update soon" forState:UIControlStateNormal];
 }

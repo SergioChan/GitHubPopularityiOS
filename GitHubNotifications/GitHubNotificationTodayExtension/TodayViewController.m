@@ -11,10 +11,13 @@
 #import "SCGraphView.h"
 #import "UIView+ViewFrameGeometry.h"
 #import "SCFollowerAndStarManager.h"
+#import "SCDefaultsManager.h"
 
 @interface TodayViewController () <NCWidgetProviding>
 {
     BOOL accountHasSet;
+    NSString *userName;
+    NSString *userToken;
 }
 @end
 
@@ -33,10 +36,12 @@
     tapToSetButton.titleLabel.numberOfLines = 2;
     [tapToSetButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     tapToSetButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [tapToSetButton setTitle:@"Tap to initialize your \n Github Account" forState:UIControlStateNormal];
+    [tapToSetButton setTitle:@"Tap to authenticate your \n Github Account" forState:UIControlStateNormal];
     [tapToSetButton addTarget:self action:@selector(goSettingsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    NSString *userName = [[[NSUserDefaults alloc] initWithSuiteName:SCSharedDataGroupKey]  objectForKey:@"GitHubNotificationsName"];
-    if (userName == nil) {
+    userName = [[SCDefaultsManager sharedManager] getUserName];
+    userToken = [[SCDefaultsManager sharedManager] getUserToken];
+    
+    if ([userName isEqualToString:@""] || [userToken isEqualToString:@""]) {
         fuck.alpha = 0.0f;
         [self.view addSubview:tapToSetButton];
     } else {

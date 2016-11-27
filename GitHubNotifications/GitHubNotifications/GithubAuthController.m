@@ -75,8 +75,6 @@
     _gha = [[GithubAuthenticatorView alloc] initWithFrame:CGRectMake(0.0f, 80.0f, ScreenWidth, self.view.height - 80.0f)];
     _gha.authDelegate = self;
     [self.view addSubview:_gha];
-    
-    self.authDelegate = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

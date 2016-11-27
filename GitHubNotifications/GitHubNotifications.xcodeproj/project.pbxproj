@@ -19,6 +19,8 @@
 		5027B47D1DE9C82300AE7D03 /* GithubAuthController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B4781DE9C82300AE7D03 /* GithubAuthController.m */; };
 		5027B47E1DE9C82300AE7D03 /* GithubAuthenticatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B47A1DE9C82300AE7D03 /* GithubAuthenticatorView.m */; };
 		5027B47F1DE9C82300AE7D03 /* NSDictionary+UrlEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B47C1DE9C82300AE7D03 /* NSDictionary+UrlEncoding.m */; };
+		5027B4861DEA709A00AE7D03 /* SCDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B4851DEA709A00AE7D03 /* SCDefaultsManager.m */; };
+		5027B4871DEA712600AE7D03 /* SCDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B4851DEA709A00AE7D03 /* SCDefaultsManager.m */; };
 		507666F91DE88FFC004291F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 507666F81DE88FFC004291F8 /* main.m */; };
 		507666FC1DE88FFC004291F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 507666FB1DE88FFC004291F8 /* AppDelegate.m */; };
 		507667021DE88FFC004291F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 507667001DE88FFC004291F8 /* Main.storyboard */; };
@@ -75,6 +77,10 @@
 		5027B47B1DE9C82300AE7D03 /* NSDictionary+UrlEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+UrlEncoding.h"; sourceTree = "<group>"; };
 		5027B47C1DE9C82300AE7D03 /* NSDictionary+UrlEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+UrlEncoding.m"; sourceTree = "<group>"; };
 		5027B4831DE9C84400AE7D03 /* Defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
+		5027B4841DEA709A00AE7D03 /* SCDefaultsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDefaultsManager.h; sourceTree = "<group>"; };
+		5027B4851DEA709A00AE7D03 /* SCDefaultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCDefaultsManager.m; sourceTree = "<group>"; };
+		5027B4881DEA74E500AE7D03 /* GitHubNotificationTodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GitHubNotificationTodayExtension.entitlements; sourceTree = "<group>"; };
+		5027B4891DEA757400AE7D03 /* GitHubNotifications.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GitHubNotifications.entitlements; sourceTree = "<group>"; };
 		507666F41DE88FFC004291F8 /* GitHubNotifications.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubNotifications.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		507666F81DE88FFC004291F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		507666FA1DE88FFC004291F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -189,6 +195,7 @@
 		507666F61DE88FFC004291F8 /* GitHubNotifications */ = {
 			isa = PBXGroup;
 			children = (
+				5027B4891DEA757400AE7D03 /* GitHubNotifications.entitlements */,
 				5027B4751DE9C80000AE7D03 /* Service */,
 				50BEB9A71DE898E6005A06B8 /* Utils */,
 				50BEB9A01DE89287005A06B8 /* ViewControllers */,
@@ -227,6 +234,8 @@
 				5027B4641DE927F500AE7D03 /* UIView+ViewFrameGeometry.h */,
 				50BEB9A41DE898E0005A06B8 /* Reachability.h */,
 				50BEB9A51DE898E0005A06B8 /* Reachability.m */,
+				5027B4841DEA709A00AE7D03 /* SCDefaultsManager.h */,
+				5027B4851DEA709A00AE7D03 /* SCDefaultsManager.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -234,6 +243,7 @@
 		50D7C8EE1DE920A800927FB9 /* GitHubNotificationTodayExtension */ = {
 			isa = PBXGroup;
 			children = (
+				5027B4881DEA74E500AE7D03 /* GitHubNotificationTodayExtension.entitlements */,
 				5027B4701DE9854F00AE7D03 /* Network */,
 				5027B4671DE931DE00AE7D03 /* Service */,
 				50D7C9011DE922F400927FB9 /* Models */,
@@ -345,6 +355,9 @@
 						DevelopmentTeam = Q8H99663FH;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
@@ -354,6 +367,11 @@
 						CreatedOnToolsVersion = 8.1;
 						DevelopmentTeam = Q8H99663FH;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -483,6 +501,7 @@
 				5027B47D1DE9C82300AE7D03 /* GithubAuthController.m in Sources */,
 				5027B4731DE9856C00AE7D03 /* SCNetworkManager.m in Sources */,
 				5027B47F1DE9C82300AE7D03 /* NSDictionary+UrlEncoding.m in Sources */,
+				5027B4861DEA709A00AE7D03 /* SCDefaultsManager.m in Sources */,
 				5027B46E1DE9854000AE7D03 /* SCStarGraphView.m in Sources */,
 				5027B47E1DE9C82300AE7D03 /* GithubAuthenticatorView.m in Sources */,
 				507666FC1DE88FFC004291F8 /* AppDelegate.m in Sources */,
@@ -498,6 +517,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5027B4871DEA712600AE7D03 /* SCDefaultsManager.m in Sources */,
 				50D7C8F11DE920A800927FB9 /* TodayViewController.m in Sources */,
 				50D7C9001DE922A000927FB9 /* SCGraphView.m in Sources */,
 				5027B46B1DE9322300AE7D03 /* SCFollowerAndStarManager.m in Sources */,
@@ -639,6 +659,7 @@
 			baseConfigurationReference = 67771657903971DE2A1A9D3F /* Pods-GitHubNotifications.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GitHubNotifications/GitHubNotifications.entitlements;
 				DEVELOPMENT_TEAM = Q8H99663FH;
 				INFOPLIST_FILE = GitHubNotifications/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -653,6 +674,7 @@
 			baseConfigurationReference = D7EBDB8F4975D86C56C0EAE0 /* Pods-GitHubNotifications.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = GitHubNotifications/GitHubNotifications.entitlements;
 				DEVELOPMENT_TEAM = Q8H99663FH;
 				INFOPLIST_FILE = GitHubNotifications/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -666,6 +688,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D93FF3531289177A27CA3070 /* Pods-GitHubNotificationTodayExtension.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = GitHubNotificationTodayExtension/GitHubNotificationTodayExtension.entitlements;
 				DEVELOPMENT_TEAM = Q8H99663FH;
 				INFOPLIST_FILE = GitHubNotificationTodayExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -680,6 +703,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD99934346C3A35480DFFB1A /* Pods-GitHubNotificationTodayExtension.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = GitHubNotificationTodayExtension/GitHubNotificationTodayExtension.entitlements;
 				DEVELOPMENT_TEAM = Q8H99663FH;
 				INFOPLIST_FILE = GitHubNotificationTodayExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
