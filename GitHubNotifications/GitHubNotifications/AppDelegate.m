@@ -10,8 +10,9 @@
 #import "Reachability.h"
 #import "SCFollowerAndStarManager.h"
 #import "SCDefaultsManager.h"
+#import <UserNotifications/UserNotifications.h>
 
-@interface AppDelegate () <SCFollowerAndStarDelegate>
+@interface AppDelegate () <SCFollowerAndStarDelegate,UNUserNotificationCenterDelegate>
 
 @property (nonatomic) Reachability *hostReachability;
 
@@ -29,6 +30,18 @@
     /*
      Observe the kNetworkReachabilityChangedNotification. When that notification is posted, the method reachabilityChanged will be called.
      */
+    [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionAlert | UNAuthorizationOptionSound) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+    }];
+    
+    [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
+    
+    [[UNUserNotificationCenter currentNotificationCenter] removeDeliveredNotificationsWithIdentifiers:@[@"sergio.chan.GitHubNotifications.notification"]];
+    
+    UNNotificationCategory *category = [UNNotificationCategory categoryWithIdentifier:@"sergio.chan.GitHubNotifications.notification" actions:@[] intentIdentifiers:@[@"sergio.chan.GitHubNotifications.notification"] options:(UNNotificationCategoryOptionNone | UNNotificationCategoryOptionCustomDismissAction)];
+    
+    NSSet *categorySet = [[NSSet alloc] initWithObjects:category, nil];
+    [[UNUserNotificationCenter currentNotificationCenter] setNotificationCategories:categorySet];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     //Change the host name here to change the server you want to monitor.
     NSString *remoteHostName = @"github.com";
@@ -38,6 +51,10 @@
     [self updateInterfaceWithReachability:self.hostReachability];
     
     return YES;
+}
+
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler{
+    completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound);
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
@@ -82,7 +99,6 @@
             NSLog(@"UIBackgroundFetchResultFailed");
             completionHandler(UIBackgroundFetchResultFailed);
             return;
-            break;
         }
         case ReachableViaWWAN:
         {
@@ -107,8 +123,6 @@
         [[SCDefaultsManager sharedManager] setRenderStarArray:object];
         completionHandler(UIBackgroundFetchResultNewData);
     }];
-    
-//    completionHandler(UIBackgroundFetchResultFailed);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

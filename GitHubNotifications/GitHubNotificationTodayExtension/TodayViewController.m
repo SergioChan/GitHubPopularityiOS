@@ -38,10 +38,10 @@
     [super viewDidLoad];
     accountHasSet = NO;
     
-    _followerGraphView = [[SCGraphView alloc] initWithFrame:CGRectMake(5.0f, 110.0f, self.view.width - 30.0f, 100.0f) columns:24];
+    _followerGraphView = [[SCGraphView alloc] initWithFrame:CGRectMake(10.0f, 110.0f, self.view.width - 30.0f, 100.0f) columns:24];
 //    [self.view addSubview:_followerGraphView];
     
-    _starGraphView = [[SCStarGraphView alloc] initWithFrame:CGRectMake(5.0f, 5.0f, self.view.width - 30.0f, 100.0f)];
+    _starGraphView = [[SCStarGraphView alloc] initWithFrame:CGRectMake(10.0f, 5.0f, self.view.width - 30.0f, 100.0f)];
     [self.view addSubview:_starGraphView];
     
     tapToSetButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, 100.0f)];
@@ -53,17 +53,6 @@
     [tapToSetButton setTitle:@"Tap to authenticate your \n Github Account" forState:UIControlStateNormal];
     [tapToSetButton addTarget:self action:@selector(goSettingsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:tapToSetButton];
-    
-//    userName = [[SCDefaultsManager sharedManager] getUserName];
-//    userToken = [[SCDefaultsManager sharedManager] getUserToken];
-//    
-//    if ([userName isEqualToString:@""] || [userToken isEqualToString:@""]) {
-//        _followerGraphView.alpha = 0.0f;
-//        _starGraphView.alpha = 0.0f;
-//        [self.view addSubview:tapToSetButton];
-//    } else {
-//        accountHasSet = YES;
-//    }
 
     self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
     
@@ -95,7 +84,7 @@
 
 - (void)updateFollowerGraphViewWithData:(NSDictionary *)folData
 {
-//    folData = @{@"2016-11-28":@(2),@"2016-11-27":@(5)};
+//    folData = @{@"2016-11-28":@(5),@"2016-11-27":@(8),@"2016-11-26":@(4),@"2016-11-25":@(9),@"2016-11-24":@(2),@"2016-11-23":@(3),@"2016-11-22":@(2),@"2016-11-21":@(5),@"2016-11-20":@(7),@"2016-11-19":@(8),@"2016-11-18":@(3),@"2016-11-17":@(6),@"2016-11-16":@(1),@"2016-11-15":@(4),@"2016-11-14":@(7),@"2016-11-13":@(4),@"2016-11-12":@(4),@"2016-11-11":@(2),@"2016-11-10":@(6)};
     
     NSDate *today = [NSDate date];
     NSCalendar *cal = [NSCalendar currentCalendar];

@@ -26,6 +26,7 @@ typedef void (^finishUpdatingWithObjectBlock)(id object);
 @property(nonatomic, copy) finishUpdatingWithObjectBlock completionBlock;
 
 + (id)sharedManager;
+- (void)localNotificationMessage:(NSString *)msg;
 - (void)refreshData;
 
 @end

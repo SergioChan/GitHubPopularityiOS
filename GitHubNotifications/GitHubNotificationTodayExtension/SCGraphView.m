@@ -51,7 +51,7 @@
     CGFloat nextX = 0.0f;
 
     for (NSInteger i = 0; i < numberOfColumns; i++) {
-        SCItemView *item = [[SCItemView alloc] initWithItemWidth:self.width/numberOfColumns maximunHeight:self.height];
+        SCItemView *item = [[SCItemView alloc] initWithItemWidth:self.width/numberOfColumns maximunHeight:self.height - 10.0f];
         
         CGFloat relHeight = 0.1f;
         if (i >= [itemValueArray count]) {

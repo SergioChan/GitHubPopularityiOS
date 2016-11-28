@@ -10,6 +10,7 @@
 #import "SCNetworkManager.h"
 #import "SCDefaultsManager.h"
 #import "DateTools.h"
+#import <UserNotifications/UserNotifications.h>
 
 @interface SCFollowerAndStarManager()
 {
@@ -84,6 +85,9 @@
             [[SCDefaultsManager sharedManager] addDeltaToRenderFollowersDict:0 toKey:key];
         } else {
             NSInteger delta = numberOfFollowers - cachedNumberOfFollowers;
+            if (delta > 0) {
+                [self localNotificationMessage:delta > 1 ? [NSString stringWithFormat:@"You've just got %ld new followers!",delta] : [NSString stringWithFormat:@"You've just got %ld new follower!",delta]];
+            }
             NSString *key = [NSString stringWithFormat:@"%ld-%ld-%ld",now.year,now.month,now.day];
             [[SCDefaultsManager sharedManager] addDeltaToRenderFollowersDict:delta toKey:key];
         }
@@ -107,6 +111,7 @@
                 NSInteger cachedNumberOfStars = [[SCDefaultsManager sharedManager] getCachedStarNumber];
                 NSInteger delta = starCount - cachedNumberOfStars;
                 if (delta > 0) {
+                    [self localNotificationMessage:delta > 1 ? [NSString stringWithFormat:@"You've just got %ld new stars!",delta] : [NSString stringWithFormat:@"You've just got %ld new star!",delta]];
                     for (NSInteger i = 0; i < delta; i ++) {
                         // Today adding how many stars just add to cached starsArray
                         [_starsArray addObject:@{@"date":[NSDate date],@"userName":@"Someone",@"repo":@""}];
@@ -124,6 +129,25 @@
             }
         }
     } failure:^(NSError *error) {
+    }];
+}
+
+- (void)localNotificationMessage:(NSString *)msg
+{
+    UNMutableNotificationContent *content = [[UNMutableNotificationContent alloc] init];
+    content.title = @"Popularity Notification";
+    content.subtitle = @"";
+    content.body = msg;
+    
+    UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:5.0f repeats:NO];
+
+    NSString *requestIdentifier = @"sergio.chan.GitHubNotifications.notification";
+    
+    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:requestIdentifier content:content trigger:trigger];
+    [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+        if (error == nil) {
+            NSLog(@"local notified succeeded");
+        }
     }];
 }
 
@@ -192,5 +216,6 @@
     } failure:^(NSError *error) {
     }];
 }
+
 
 @end

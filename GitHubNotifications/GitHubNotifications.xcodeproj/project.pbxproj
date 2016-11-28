@@ -25,6 +25,8 @@
 		5027B48D1DEACC5D00AE7D03 /* SCStar.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B48B1DEACC5D00AE7D03 /* SCStar.m */; };
 		5027B4901DEACC6D00AE7D03 /* SCFollower.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B48F1DEACC6D00AE7D03 /* SCFollower.m */; };
 		5027B4911DEACC6D00AE7D03 /* SCFollower.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B48F1DEACC6D00AE7D03 /* SCFollower.m */; };
+		507501671DEC5FC0000636F1 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507501661DEC5FC0000636F1 /* UserNotifications.framework */; };
+		507501681DEC6B6C000636F1 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507501661DEC5FC0000636F1 /* UserNotifications.framework */; };
 		507666F91DE88FFC004291F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 507666F81DE88FFC004291F8 /* main.m */; };
 		507666FC1DE88FFC004291F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 507666FB1DE88FFC004291F8 /* AppDelegate.m */; };
 		507667021DE88FFC004291F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 507667001DE88FFC004291F8 /* Main.storyboard */; };
@@ -89,6 +91,7 @@
 		5027B48B1DEACC5D00AE7D03 /* SCStar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCStar.m; sourceTree = "<group>"; };
 		5027B48E1DEACC6D00AE7D03 /* SCFollower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCFollower.h; sourceTree = "<group>"; };
 		5027B48F1DEACC6D00AE7D03 /* SCFollower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCFollower.m; sourceTree = "<group>"; };
+		507501661DEC5FC0000636F1 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		507666F41DE88FFC004291F8 /* GitHubNotifications.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubNotifications.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		507666F81DE88FFC004291F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		507666FA1DE88FFC004291F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -124,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				507501671DEC5FC0000636F1 /* UserNotifications.framework in Frameworks */,
 				44BB6B30770C8D41144FCB9E /* libPods-GitHubNotifications.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				507501681DEC6B6C000636F1 /* UserNotifications.framework in Frameworks */,
 				50D7C8ED1DE920A800927FB9 /* NotificationCenter.framework in Frameworks */,
 				7BB1ECB1C1F34380DB65FE0C /* libPods-GitHubNotificationTodayExtension.a in Frameworks */,
 			);
@@ -302,6 +307,7 @@
 		95EE2CA3C2AE3EF787E4F25C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				507501661DEC5FC0000636F1 /* UserNotifications.framework */,
 				8C4FCAF87D505E39DFBDB460 /* libPods-GitHubNotifications.a */,
 				50D7C8EC1DE920A800927FB9 /* NotificationCenter.framework */,
 				B066974D1D1B95A12C59CDF8 /* libPods-GitHubNotificationTodayExtension.a */,
@@ -371,6 +377,9 @@
 								enabled = 1;
 							};
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
