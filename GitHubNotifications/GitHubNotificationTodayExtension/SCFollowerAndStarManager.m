@@ -16,6 +16,7 @@
     BOOL shouldStopGettingRepos;
     BOOL shouldStopGettingStars;
     NSInteger finshedRepoCount;
+    NSInteger starCount;
 }
 @property (nonatomic, strong) NSMutableArray *starsArray;
 @property (nonatomic, strong) NSMutableArray *reposArray;
@@ -51,6 +52,7 @@
     shouldStopGettingRepos = NO;
     shouldStopGettingStars = NO;
     finshedRepoCount = 0;
+    starCount = 0;
     
     NSString *userName = [[SCDefaultsManager sharedManager] getUserName];
     if ([userName isEqualToString:@""]) {
@@ -61,7 +63,13 @@
     _reposArray = [NSMutableArray array];
     
     [self getCurrentFollowerData];
-    [self getCurrentReposDatawithPage:1];
+    
+    if ([[SCDefaultsManager sharedManager] isRepoCached]) {
+        _starsArray = [[[SCDefaultsManager sharedManager] getRenderStarArray] mutableCopy];
+        [self updateNewStarsFromPage:1];
+    } else {
+        [self getCurrentReposDatawithPage:1];
+    }
 }
 
 - (void)getCurrentFollowerData
@@ -85,6 +93,40 @@
     }];
 }
 
+- (void)updateNewStarsFromPage:(NSInteger)page
+{
+    [[SCNetworkManager sharedManager] getRepoForUser:[[SCDefaultsManager sharedManager] getUserName] page:page success:^(id object, NSURLResponse *reponse) {
+        if ([object isKindOfClass:[NSArray class]]) {
+            NSLog(@"updateNewStarsFromPage page: %ld get %ld results , example: %@",page,[object count],[object objectAtIndex:0]);
+            
+            for (NSDictionary *item in object) {
+                starCount = starCount + [[item objectForKey:@"stargazers_count"] integerValue];
+            }
+            
+            if ([object count] < 100) {
+                NSInteger cachedNumberOfStars = [[SCDefaultsManager sharedManager] getCachedStarNumber];
+                NSInteger delta = starCount - cachedNumberOfStars;
+                if (delta > 0) {
+                    for (NSInteger i = 0; i < delta; i ++) {
+                        // Today adding how many stars just add to cached starsArray
+                        [_starsArray addObject:@{@"date":[NSDate date],@"userName":@"Someone",@"repo":@""}];
+                    }
+                }
+                if ([self.delegate respondsToSelector:@selector(didFinishUpdatingStarData:)]) {
+                    [self.delegate didFinishUpdatingStarData:_starsArray];
+                }
+                if (self.completionBlock) {
+                    self.completionBlock(_starsArray);
+                }
+                [[SCDefaultsManager sharedManager] setRepoCached:YES];
+            } else {
+                [self updateNewStarsFromPage:page + 1];
+            }
+        }
+    } failure:^(NSError *error) {
+    }];
+}
+
 - (void)isRepoCachedStarData:(NSString *)repoName {
     return [[SCDefaultsManager sharedManager] isRepoCachedStarData:repoName];
 }
@@ -95,8 +137,14 @@
         if ([object isKindOfClass:[NSArray class]]) {
             NSLog(@"getRepoForUser page: %ld get %ld results , example: %@",page,[object count],[object objectAtIndex:0]);
             [_reposArray addObjectsFromArray:object];
+            
+            for (NSDictionary *item in object) {
+                starCount = starCount + [[item objectForKey:@"stargazers_count"] integerValue];
+            }
+            
             if ([object count] < 100) {
                 [self processCurrentRepoArray];
+                [[SCDefaultsManager sharedManager] setStarNumber:starCount];
             } else {
                 [self getCurrentReposDatawithPage:page + 1];
             }
@@ -109,9 +157,7 @@
 {
     for (NSDictionary *item in _reposArray) {
         NSString *repoName = [item objectForKey:@"name"];
-//        if (![[SCDefaultsManager sharedManager] isRepoCached:repoName]) {
-            [self getCurrentStarsDatawithPage:1 repoName:repoName];
-//        }
+        [self getCurrentStarsDatawithPage:1 repoName:repoName];
     }
 }
 
@@ -125,6 +171,10 @@
                 NSLog(@"getStarForUser repo:%@ page: %ld get %ld results",repoName, page,[object count]);
                 finshedRepoCount ++;
                 
+                if ([self.delegate respondsToSelector:@selector(didFinishUpdatingRepo:)]) {
+                    [self.delegate didFinishUpdatingRepo:repoName];
+                }
+                
                 if (finshedRepoCount == [_reposArray count]) {
                     if ([self.delegate respondsToSelector:@selector(didFinishUpdatingStarData:)]) {
                         [self.delegate didFinishUpdatingStarData:_starsArray];
@@ -132,19 +182,14 @@
                     if (self.completionBlock) {
                         self.completionBlock(_starsArray);
                     }
+                    [[SCDefaultsManager sharedManager] setRepoCached:YES];
                 }
                 
-                if ([self.delegate respondsToSelector:@selector(didFinishUpdatingRepo:)]) {
-                    [self.delegate didFinishUpdatingRepo:repoName];
-                }
-                
-                [[SCDefaultsManager sharedManager] setRepoCached:YES repoName:repoName];
             } else {
                 [self getCurrentStarsDatawithPage:page + 1 repoName:repoName];
             }
         }
     } failure:^(NSError *error) {
-        [[SCDefaultsManager sharedManager] setRepoCached:NO repoName:repoName];
     }];
 }
 

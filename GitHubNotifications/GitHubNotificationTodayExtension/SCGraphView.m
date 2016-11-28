@@ -13,7 +13,7 @@
 @interface SCGraphView()
 {
     NSInteger numberOfColumns;
-    NSMutableArray *itemArray;
+    NSMutableArray *itemValueArray;
 }
 @property (strong, nonatomic) NSMutableArray *itemArray;
 
@@ -53,11 +53,11 @@
     for (NSInteger i = 0; i < numberOfColumns; i++) {
         SCItemView *item = [[SCItemView alloc] initWithItemWidth:self.width/numberOfColumns maximunHeight:self.height];
         
-        CGFloat relHeight = 0.0f;
-        if (i >= [itemArray count]) {
-            relHeight = 0.0f;
+        CGFloat relHeight = 0.1f;
+        if (i >= [itemValueArray count]) {
+            relHeight = 0.1f;
         } else {
-            relHeight = [[itemArray objectAtIndex:i] floatValue];
+            relHeight = [[itemValueArray objectAtIndex:i] floatValue] + 0.1f;
         }
         
         item.index = i;
@@ -74,7 +74,7 @@
 
 - (void)refreshWithFollwers:(NSArray *)dayArray
 {
-    itemArray = [dayArray mutableCopy];
+    itemValueArray = [dayArray mutableCopy];
     [self layoutItems];
 }
 @end

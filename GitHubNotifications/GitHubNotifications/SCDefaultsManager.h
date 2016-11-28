@@ -12,6 +12,9 @@
 
 + (id)sharedManager;
 
+- (void)setFirstLogin:(BOOL)firstLogin;
+- (BOOL)isFirstLogin;
+
 // UserName
 - (void)setUserName:(NSString *)name;
 - (NSString *)getUserName;
@@ -19,6 +22,9 @@
 // UserAccessToken
 - (void)setUserToken:(NSString *)token;
 - (NSString *)getUserToken;
+
+- (void)setStarNumber:(NSInteger)star;
+- (NSInteger)getCachedStarNumber;
 
 // StarArray : Array -> [(SCStar)]
 - (void)setStarArray:(NSArray *)data;
@@ -29,9 +35,8 @@
 - (NSInteger)getFollowersNumber;
 
 // RepoArray : Dict -> repo:{cached(BOOL)}
-- (void)setRepoCached:(BOOL)cached repoName:(NSString *)repo;
-- (NSMutableDictionary *)getRepoCachedDict;
-- (BOOL)isRepoCached:(NSString *)repoName;
+- (void)setRepoCached:(BOOL)cached;
+- (BOOL)isRepoCached;
 
 - (void)setRenderStarArray:(NSArray *)data;
 - (NSArray *)getRenderStarArray;

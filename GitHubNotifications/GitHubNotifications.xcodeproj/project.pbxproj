@@ -678,7 +678,7 @@
 				CODE_SIGN_ENTITLEMENTS = GitHubNotifications/GitHubNotifications.entitlements;
 				DEVELOPMENT_TEAM = Q8H99663FH;
 				INFOPLIST_FILE = GitHubNotifications/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sergio.chan.GitHubNotifications;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -693,7 +693,7 @@
 				CODE_SIGN_ENTITLEMENTS = GitHubNotifications/GitHubNotifications.entitlements;
 				DEVELOPMENT_TEAM = Q8H99663FH;
 				INFOPLIST_FILE = GitHubNotifications/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sergio.chan.GitHubNotifications;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -707,7 +707,7 @@
 				CODE_SIGN_ENTITLEMENTS = GitHubNotificationTodayExtension/GitHubNotificationTodayExtension.entitlements;
 				DEVELOPMENT_TEAM = Q8H99663FH;
 				INFOPLIST_FILE = GitHubNotificationTodayExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sergio.chan.GitHubNotifications.GitHubNotificationTodayExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -722,7 +722,7 @@
 				CODE_SIGN_ENTITLEMENTS = GitHubNotificationTodayExtension/GitHubNotificationTodayExtension.entitlements;
 				DEVELOPMENT_TEAM = Q8H99663FH;
 				INFOPLIST_FILE = GitHubNotificationTodayExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = sergio.chan.GitHubNotifications.GitHubNotificationTodayExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";

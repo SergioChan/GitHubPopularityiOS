@@ -22,6 +22,9 @@
     NSString *userName;
     NSString *userToken;
     NSArray *starDataArray;
+    
+    UIButton *tapToSetButton;
+    UIButton *tapToHelpButton;
 }
 
 @property (nonatomic, strong) SCGraphView *followerGraphView;
@@ -41,7 +44,7 @@
     _starGraphView = [[SCStarGraphView alloc] initWithFrame:CGRectMake(5.0f, 5.0f, self.view.width - 30.0f, 100.0f)];
     [self.view addSubview:_starGraphView];
     
-    UIButton *tapToSetButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, 100.0f)];
+    tapToSetButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, 100.0f)];
     tapToSetButton.backgroundColor = [UIColor clearColor];
     tapToSetButton.titleLabel.font = [UIFont systemFontOfSize:17.0f];
     tapToSetButton.titleLabel.numberOfLines = 2;
@@ -49,16 +52,18 @@
     tapToSetButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [tapToSetButton setTitle:@"Tap to authenticate your \n Github Account" forState:UIControlStateNormal];
     [tapToSetButton addTarget:self action:@selector(goSettingsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    userName = [[SCDefaultsManager sharedManager] getUserName];
-    userToken = [[SCDefaultsManager sharedManager] getUserToken];
+    [self.view addSubview:tapToSetButton];
     
-    if ([userName isEqualToString:@""] || [userToken isEqualToString:@""]) {
-        _followerGraphView.alpha = 0.0f;
-        _starGraphView.alpha = 0.0f;
-        [self.view addSubview:tapToSetButton];
-    } else {
-        accountHasSet = YES;
-    }
+//    userName = [[SCDefaultsManager sharedManager] getUserName];
+//    userToken = [[SCDefaultsManager sharedManager] getUserToken];
+//    
+//    if ([userName isEqualToString:@""] || [userToken isEqualToString:@""]) {
+//        _followerGraphView.alpha = 0.0f;
+//        _starGraphView.alpha = 0.0f;
+//        [self.view addSubview:tapToSetButton];
+//    } else {
+//        accountHasSet = YES;
+//    }
 
     self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
     
@@ -70,13 +75,46 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    userName = [[SCDefaultsManager sharedManager] getUserName];
+    userToken = [[SCDefaultsManager sharedManager] getUserToken];
+    
+    if ([userName isEqualToString:@""] || [userToken isEqualToString:@""]) {
+        _followerGraphView.alpha = 0.0f;
+        _starGraphView.alpha = 0.0f;
+        tapToSetButton.hidden = NO;
+    } else {
+        _followerGraphView.alpha = 1.0f;
+        _starGraphView.alpha = 1.0f;
+        accountHasSet = YES;
+        tapToSetButton.hidden = YES;
+    }
+    
 //    [[SCFollowerAndStarManager sharedManager] refreshData];
 }
 
 - (void)updateFollowerGraphViewWithData:(NSDictionary *)folData
 {
-    NSDate *now = [NSDate date];
-    // Fuck TODO:
+//    folData = @{@"2016-11-28":@(2),@"2016-11-27":@(5)};
+    
+    NSDate *today = [NSDate date];
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *components = [cal components:(NSCalendarUnitDay) fromDate:today];
+    [components setDay:1];
+    
+    NSMutableArray *tmp = [NSMutableArray array];
+    for (NSInteger i = 0;i < 24;i ++) {
+        [components setDay:-i];
+        NSDate *date = [cal dateByAddingComponents:components toDate:today options:0];
+        NSString *key = [NSString stringWithFormat:@"%ld-%ld-%ld",date.year,date.month,date.day];
+        if ([folData objectForKey:key]) {
+            [tmp addObject:@([[folData objectForKey:key] integerValue] / 10.0f)];
+        } else {
+            [tmp addObject:@(0.0f)];
+        }
+    }
+    
+    [_followerGraphView refreshWithFollwers:tmp];
 }
 
 - (void)updateGraphViewWithData:(NSArray *)starData
@@ -205,7 +243,7 @@
                          }];
     }
     else {
-        self.preferredContentSize = CGSizeMake(0, 200.0);
+        self.preferredContentSize = CGSizeMake(0, 220.0);
         [self updateFollowerGraphViewWithData:[[SCDefaultsManager sharedManager] getRenderFollowersDict]];
         [self.view addSubview:_followerGraphView];
 

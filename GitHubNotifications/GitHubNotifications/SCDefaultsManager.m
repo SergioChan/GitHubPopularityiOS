@@ -7,9 +7,11 @@
 //
 
 #import "SCDefaultsManager.h"
+#define KEY_IS_FIRST_LOGIN            @"GitHubNotificationsIsFirstLogin"
 #define KEY_NAME            @"GitHubNotificationsName"
 #define KEY_TOKEN           @"GitHubNotificationsToken"
 #define KEY_STAR_ARRAY      @"GitHubNotificationsStar"
+#define KEY_STAR_NUMER      @"GitHubNotificationsStarNumber"
 #define KEY_FOLLOWER_ARRAY  @"GitHubNotificationsFollower"
 #define KEY_REPO_DICT       @"GitHubNotificationsRepo"
 #define KEY_RENDER_STAR_ARRAY      @"GitHubNotificationsRenderStar"
@@ -41,6 +43,21 @@
     return self;
 }
 
+- (void)setFirstLogin:(BOOL)firstLogin
+{
+    [_groupDefaults setObject:@(firstLogin) forKey:KEY_IS_FIRST_LOGIN];
+}
+
+- (BOOL)isFirstLogin
+{
+    if ([_groupDefaults objectForKey:KEY_IS_FIRST_LOGIN]) {
+        return [[_groupDefaults objectForKey:KEY_IS_FIRST_LOGIN] boolValue];
+    } else {
+        [_groupDefaults setObject:@(0) forKey:KEY_IS_FIRST_LOGIN];
+        return NO;
+    }
+}
+
 - (void)setUserName:(NSString *)name
 {
     [_groupDefaults setObject:name forKey:KEY_NAME];
@@ -59,8 +76,9 @@
 - (void)clearCache
 {
     [_groupDefaults setObject:@[] forKey:KEY_STAR_ARRAY];
-    [_groupDefaults setObject:@[] forKey:KEY_FOLLOWER_ARRAY];
-    [_groupDefaults setObject:@{} forKey:KEY_REPO_DICT];
+    [_groupDefaults setObject:@(-1) forKey:KEY_FOLLOWER_ARRAY];
+    [_groupDefaults setObject:@{} forKey:KEY_RENDER_FOLLOWER_ARRAY];
+    [self setRepoCached:NO];
 }
 
 - (void)setUserToken:(NSString *)token
@@ -75,6 +93,21 @@
     } else {
         [_groupDefaults setObject:@"" forKey:KEY_TOKEN];
         return @"";
+    }
+}
+
+- (void)setStarNumber:(NSInteger)star
+{
+    [_groupDefaults setObject:@(star) forKey:KEY_STAR_NUMER];
+}
+
+- (NSInteger)getCachedStarNumber
+{
+    if ([_groupDefaults objectForKey:KEY_STAR_NUMER]) {
+        return [[_groupDefaults objectForKey:KEY_STAR_NUMER] integerValue];
+    } else {
+        [_groupDefaults setObject:@(0) forKey:KEY_STAR_NUMER];
+        return 0;
     }
 }
 
@@ -110,6 +143,10 @@
 
 - (void)addDeltaToRenderFollowersDict:(NSInteger)delta toKey:(NSString *)key
 {
+    if (delta == 0) {
+        return;
+    }
+    
     NSMutableDictionary *dict = [[self getRenderFollowersDict] mutableCopy];
     if ([dict objectForKey:key]) {
         NSInteger tmp = [[dict objectForKey:key] integerValue];
@@ -146,31 +183,15 @@
     }
 }
 
-- (void)setRepoCached:(BOOL)cached repoName:(NSString *)repo
+- (void)setRepoCached:(BOOL)cached
 {
-    NSMutableDictionary *dict = [self getRepoCachedDict];
-    [dict setObject:@(cached) forKey:repo];
-    [_groupDefaults setObject:dict forKey:KEY_REPO_DICT];
+    [_groupDefaults setObject:@(cached) forKey:KEY_REPO_DICT];
 }
 
-- (NSMutableDictionary *)getRepoCachedDict
+- (BOOL)isRepoCached
 {
     if ([_groupDefaults objectForKey:KEY_REPO_DICT]) {
-        return [[_groupDefaults objectForKey:KEY_REPO_DICT] mutableCopy];
-    } else {
-        [_groupDefaults setObject:@{} forKey:KEY_REPO_DICT];
-        return [NSMutableDictionary dictionary];
-    }
-}
-
-- (BOOL)isRepoCached:(NSString *)repoName
-{
-    if ([_groupDefaults objectForKey:KEY_REPO_DICT]) {
-        if ([[_groupDefaults objectForKey:KEY_REPO_DICT] objectForKey:repoName]) {
-            return [[[_groupDefaults objectForKey:KEY_REPO_DICT] objectForKey:repoName] boolValue];
-        } else {
-            return NO;
-        }
+        return [[_groupDefaults objectForKey:KEY_REPO_DICT] boolValue];
     } else {
         return NO;
     }

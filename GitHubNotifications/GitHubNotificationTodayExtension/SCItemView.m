@@ -53,11 +53,16 @@
     CGFloat dstBottom = self.bottom;
     
     [UIView animateWithDuration:0.2f animations:^{
+//        if (relativeHeight * _maximumHeight < 15.0f) {
+//            self.height = 15.0f;
+//            self.itemMainView.height = 10.0f;
+//        } else {
         self.height = relativeHeight * _maximumHeight;
         self.itemMainView.height = self.height - 10.0f;
+//        }
         
         self.bottom = dstBottom;
-        self.backgroundColor = [UIColor colorWithWhite:relativeHeight alpha:1.0f];
+        self.backgroundColor = [UIColor colorWithWhite:(1.0f - relativeHeight) alpha:1.0f];
     } completion:^(BOOL finished) {
         self.indexLabel.top = self.itemMainView.bottom;
     }];
