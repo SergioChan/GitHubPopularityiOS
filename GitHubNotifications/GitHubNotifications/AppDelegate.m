@@ -11,6 +11,9 @@
 #import "SCFollowerAndStarManager.h"
 #import "SCDefaultsManager.h"
 #import <UserNotifications/UserNotifications.h>
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 
 @interface AppDelegate () <SCFollowerAndStarDelegate,UNUserNotificationCenterDelegate>
 
@@ -25,8 +28,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
-    
-    
+    [Fabric with:@[[Answers class], [Crashlytics class]]];
+
     /*
      Observe the kNetworkReachabilityChangedNotification. When that notification is posted, the method reachabilityChanged will be called.
      */

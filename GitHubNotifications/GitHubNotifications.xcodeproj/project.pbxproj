@@ -329,6 +329,7 @@
 				50D7C8FC1DE920A800927FB9 /* Embed App Extensions */,
 				D23892C45305E881581BD335 /* [CP] Embed Pods Frameworks */,
 				5344F485ABEA212A4E6C4AEA /* [CP] Copy Pods Resources */,
+				507501691DEC8AD6000636F1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -451,6 +452,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GitHubNotificationTodayExtension/Pods-GitHubNotificationTodayExtension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		507501691DEC8AD6000636F1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" d620e3194f3924678af613e7c766a8e58d773e83 d2b4f5d20cbc22ef1c56fed2681d26c57790fda8a3796ec52dc41438f4df1953";
 		};
 		5344F485ABEA212A4E6C4AEA /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

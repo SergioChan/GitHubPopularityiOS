@@ -14,16 +14,23 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - Crashlytics (3.8.3):
+    - Fabric (~> 1.6.3)
   - DateTools (1.7.0)
+  - Fabric (1.6.11)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
+  - Crashlytics
   - DateTools
+  - Fabric
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
 
-PODFILE CHECKSUM: 89e9ed66ce0e4197a150fddb04f103095a4b8a22
+PODFILE CHECKSUM: a1e6d3024a5931513e9996cee6b712077b44ebdc
 
 COCOAPODS: 1.2.0.beta.1
