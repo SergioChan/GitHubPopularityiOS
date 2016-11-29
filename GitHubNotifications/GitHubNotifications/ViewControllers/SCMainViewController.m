@@ -11,10 +11,12 @@
 #import "GithubAuthController.h"
 #import "SCDefaultsManager.h"
 #import "SCFollowerAndStarManager.h"
+#import "SCHelpView.h"
 
 @interface SCMainViewController () <UITextFieldDelegate,GitAuthDelegate,SCFollowerAndStarDelegate>
 {
     BOOL isRefreshing;
+    SCHelpView *helpView;
 }
 @property (weak, nonatomic) IBOutlet UITextField *userNameField;
 @property (weak, nonatomic) IBOutlet UIButton *updateInfoButton;
@@ -37,6 +39,9 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [self.view addGestureRecognizer:tap];
+    
+    helpView = [[SCHelpView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, ScreenWidth, ScreenHeight)];
+    [self.view addSubview:helpView];
     
     NSString *name = [[SCDefaultsManager sharedManager] getUserName];
     if (![name isEqualToString:@""])
@@ -166,6 +171,10 @@
         [_updateInfoButton setTitle:@"Syncronizing finished" forState:UIControlStateNormal];
     });
     isRefreshing = NO;
+}
+
+- (IBAction)infoButtonClicked:(id)sender {
+    [helpView show];
 }
 
 /*

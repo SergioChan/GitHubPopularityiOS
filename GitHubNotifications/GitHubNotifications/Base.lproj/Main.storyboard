@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -44,12 +45,20 @@ For GitHub</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gjo-33-zIf">
+                                        <rect key="frame" x="323" y="46" width="22" height="22"/>
+                                        <connections>
+                                            <action selector="infoButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HHy-oF-PeE"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="oCg-5F-X16" firstAttribute="leading" secondItem="cmu-8w-ln7" secondAttribute="leading" constant="6" id="0oj-8b-6GK"/>
                                     <constraint firstItem="oCg-5F-X16" firstAttribute="trailing" secondItem="cmu-8w-ln7" secondAttribute="trailing" constant="-6" id="AgT-P0-Wsy"/>
+                                    <constraint firstItem="Gjo-33-zIf" firstAttribute="top" secondItem="cmu-8w-ln7" secondAttribute="top" constant="50" id="IFS-vd-rd8"/>
                                     <constraint firstItem="bVu-ir-gt0" firstAttribute="centerX" secondItem="cmu-8w-ln7" secondAttribute="centerX" id="NzI-Wj-bt1"/>
+                                    <constraint firstItem="Gjo-33-zIf" firstAttribute="trailing" secondItem="cmu-8w-ln7" secondAttribute="trailing" constant="-30" id="cp4-Fs-VgC"/>
                                     <constraint firstItem="oCg-5F-X16" firstAttribute="bottom" secondItem="cmu-8w-ln7" secondAttribute="bottom" constant="-145" id="t51-2e-uLK"/>
                                     <constraint firstItem="bVu-ir-gt0" firstAttribute="top" secondItem="cmu-8w-ln7" secondAttribute="top" constant="150" id="yCr-RJ-VWD"/>
                                 </constraints>
@@ -60,7 +69,7 @@ For GitHub</string>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ME8-Ar-j7P">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
-                                        <state key="normal" title="Update Info">
+                                        <state key="normal" title="Refresh Authentication and Data">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -99,4 +108,5 @@ For GitHub</string>
             <point key="canvasLocation" x="117.59999999999999" y="122.78860569715144"/>
         </scene>
     </scenes>
+    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

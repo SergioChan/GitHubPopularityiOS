@@ -27,6 +27,7 @@
 		5027B4911DEACC6D00AE7D03 /* SCFollower.m in Sources */ = {isa = PBXBuildFile; fileRef = 5027B48F1DEACC6D00AE7D03 /* SCFollower.m */; };
 		507501671DEC5FC0000636F1 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507501661DEC5FC0000636F1 /* UserNotifications.framework */; };
 		507501681DEC6B6C000636F1 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 507501661DEC5FC0000636F1 /* UserNotifications.framework */; };
+		5075016D1DED4CDD000636F1 /* SCHelpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5075016C1DED4CDD000636F1 /* SCHelpView.m */; };
 		507666F91DE88FFC004291F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 507666F81DE88FFC004291F8 /* main.m */; };
 		507666FC1DE88FFC004291F8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 507666FB1DE88FFC004291F8 /* AppDelegate.m */; };
 		507667021DE88FFC004291F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 507667001DE88FFC004291F8 /* Main.storyboard */; };
@@ -92,6 +93,8 @@
 		5027B48E1DEACC6D00AE7D03 /* SCFollower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCFollower.h; sourceTree = "<group>"; };
 		5027B48F1DEACC6D00AE7D03 /* SCFollower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCFollower.m; sourceTree = "<group>"; };
 		507501661DEC5FC0000636F1 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		5075016B1DED4CDD000636F1 /* SCHelpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCHelpView.h; sourceTree = "<group>"; };
+		5075016C1DED4CDD000636F1 /* SCHelpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCHelpView.m; sourceTree = "<group>"; };
 		507666F41DE88FFC004291F8 /* GitHubNotifications.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubNotifications.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		507666F81DE88FFC004291F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		507666FA1DE88FFC004291F8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -185,6 +188,15 @@
 			name = GitHubAuth;
 			sourceTree = "<group>";
 		};
+		5075016A1DED4CC8000636F1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5075016B1DED4CDD000636F1 /* SCHelpView.h */,
+				5075016C1DED4CDD000636F1 /* SCHelpView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		507666EB1DE88FFC004291F8 = {
 			isa = PBXGroup;
 			children = (
@@ -208,6 +220,7 @@
 		507666F61DE88FFC004291F8 /* GitHubNotifications */ = {
 			isa = PBXGroup;
 			children = (
+				5075016A1DED4CC8000636F1 /* Views */,
 				5027B4891DEA757400AE7D03 /* GitHubNotifications.entitlements */,
 				5027B4751DE9C80000AE7D03 /* Service */,
 				50BEB9A71DE898E6005A06B8 /* Utils */,
@@ -542,6 +555,7 @@
 				5027B47E1DE9C82300AE7D03 /* GithubAuthenticatorView.m in Sources */,
 				5027B48C1DEACC5D00AE7D03 /* SCStar.m in Sources */,
 				507666FC1DE88FFC004291F8 /* AppDelegate.m in Sources */,
+				5075016D1DED4CDD000636F1 /* SCHelpView.m in Sources */,
 				507666F91DE88FFC004291F8 /* main.m in Sources */,
 				50BEB9A61DE898E0005A06B8 /* Reachability.m in Sources */,
 				50BEB9A31DE892BB005A06B8 /* SCMainViewController.m in Sources */,
