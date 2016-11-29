@@ -220,8 +220,8 @@
 		507666F61DE88FFC004291F8 /* GitHubNotifications */ = {
 			isa = PBXGroup;
 			children = (
-				5075016A1DED4CC8000636F1 /* Views */,
 				5027B4891DEA757400AE7D03 /* GitHubNotifications.entitlements */,
+				5075016A1DED4CC8000636F1 /* Views */,
 				5027B4751DE9C80000AE7D03 /* Service */,
 				50BEB9A71DE898E6005A06B8 /* Utils */,
 				50BEB9A01DE89287005A06B8 /* ViewControllers */,
