@@ -110,8 +110,7 @@
                  }
                  onSuccess(result,response);
              } else {
-                 NSError *error = [[NSError alloc] initWithDomain:@"sergio.chan.GitHubNotifications" code:-1000 userInfo:nil];
-                 onFailure(error);
+                 onSuccess([NSArray array],response);
              }
          } failureBlock:onFailure];
 }
@@ -135,7 +134,12 @@
     [[manager dataTaskWithRequest:req
                 completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
                     if (error) {
-                        onFailure(error);
+                        if ([responseObject objectForKey:@"block"]) {
+                            // fucking blocked request, return 0 users
+                            onSuccess([NSArray array], response);
+                        } else {
+                            onFailure(error);
+                        }
                     } else {
                         onSuccess(responseObject, response);
                     }

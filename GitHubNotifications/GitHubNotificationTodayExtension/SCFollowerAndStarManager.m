@@ -81,19 +81,21 @@
         
         NSInteger cachedNumberOfFollowers = [[SCDefaultsManager sharedManager] getFollowersNumber];
         if (cachedNumberOfFollowers == -1) {
-            NSString *key = [NSString stringWithFormat:@"%ld-%ld-%ld",now.year,now.month,now.day];
+            NSString *key = [NSString stringWithFormat:@"%ld-%ld-%ld",(long)now.year,(long)now.month,(long)now.day];
             [[SCDefaultsManager sharedManager] addDeltaToRenderFollowersDict:0 toKey:key];
         } else {
             NSInteger delta = numberOfFollowers - cachedNumberOfFollowers;
             if (delta > 0) {
-                [self localNotificationMessage:delta > 1 ? [NSString stringWithFormat:@"You've just got %ld new followers!",delta] : [NSString stringWithFormat:@"You've just got %ld new follower!",delta]];
+                [self localNotificationMessage:delta > 1 ? [NSString stringWithFormat:@"You've just got %ld new followers!",(long)delta] : [NSString stringWithFormat:@"You've just got %ld new follower!",(long)delta]];
             }
             NSString *key = [NSString stringWithFormat:@"%ld-%ld-%ld",now.year,now.month,now.day];
             [[SCDefaultsManager sharedManager] addDeltaToRenderFollowersDict:delta toKey:key];
         }
         [[SCDefaultsManager sharedManager] setFollowersNumber:numberOfFollowers];
     } failure:^(NSError *error) {
-        
+        if ([self.delegate respondsToSelector:@selector(didFailedUpdatingStarData)]) {
+            [self.delegate didFailedUpdatingStarData];
+        }
     }];
 }
 
@@ -129,6 +131,9 @@
             }
         }
     } failure:^(NSError *error) {
+        if ([self.delegate respondsToSelector:@selector(didFailedUpdatingStarData)]) {
+            [self.delegate didFailedUpdatingStarData];
+        }
     }];
 }
 
@@ -174,14 +179,26 @@
             }
         }
     } failure:^(NSError *error) {
+        if ([self.delegate respondsToSelector:@selector(didFailedUpdatingStarData)]) {
+            [self.delegate didFailedUpdatingStarData];
+        }
     }];
 }
 
 - (void)processCurrentRepoArray
 {
+    dispatch_queue_t queue = dispatch_queue_create("sergio.chan.requestQueue", DISPATCH_QUEUE_SERIAL);
+
     for (NSDictionary *item in _reposArray) {
-        NSString *repoName = [item objectForKey:@"name"];
-        [self getCurrentStarsDatawithPage:1 repoName:repoName];
+        dispatch_async(queue, ^{
+            [NSThread sleepForTimeInterval:0.2];
+            NSString *repoName = [item objectForKey:@"name"];
+            if ([[item objectForKey:@"stargazers_count"] integerValue] > 0) {
+                [self getCurrentStarsDatawithPage:1 repoName:repoName];
+            } else {
+                finshedRepoCount ++;
+            }
+        });
     }
 }
 
@@ -214,6 +231,10 @@
             }
         }
     } failure:^(NSError *error) {
+        finshedRepoCount ++;
+//        if ([self.delegate respondsToSelector:@selector(didFailedUpdatingStarData)]) {
+//            [self.delegate didFailedUpdatingStarData];
+//        }
     }];
 }
 

@@ -173,6 +173,14 @@
     isRefreshing = NO;
 }
 
+- (void)didFailedUpdatingStarData
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_updateInfoButton setTitle:@"Syncronizing failed. Try agian? " forState:UIControlStateNormal];
+    });
+    isRefreshing = NO;
+}
+
 - (IBAction)infoButtonClicked:(id)sender {
     [helpView show];
 }

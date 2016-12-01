@@ -41,7 +41,7 @@
     _followerGraphView = [[SCGraphView alloc] initWithFrame:CGRectMake(10.0f, 110.0f, self.view.width - 30.0f, 100.0f) columns:24];
 //    [self.view addSubview:_followerGraphView];
     
-    _starGraphView = [[SCStarGraphView alloc] initWithFrame:CGRectMake(10.0f, 5.0f, self.view.width - 30.0f, 100.0f)];
+    _starGraphView = [[SCStarGraphView alloc] initWithFrame:CGRectMake(10.0f, 0.0f, self.view.width - 30.0f, 100.0f)];
     [self.view addSubview:_starGraphView];
     
     tapToSetButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, 100.0f)];

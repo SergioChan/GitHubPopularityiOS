@@ -17,6 +17,7 @@ typedef void (^finishUpdatingWithObjectBlock)(id object);
 
 - (void)didFinishUpdatingRepo:(NSString *)repoName;
 - (void)didFinishUpdatingStarData:(NSArray *)starData;
+- (void)didFailedUpdatingStarData;
 
 @end
 
