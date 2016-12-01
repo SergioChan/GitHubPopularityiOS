@@ -35,6 +35,7 @@
 @interface GithubAuthController : UIViewController <GitAuthDelegate>
 
 @property(nonatomic, copy) BMBlockVoid completionBlock;
+@property(nonatomic, copy) BMBlockVoid dismissBlock;
 @property(nonatomic, weak) id<GitAuthDelegate> authDelegate;
 
 @end

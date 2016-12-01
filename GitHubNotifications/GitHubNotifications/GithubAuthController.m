@@ -85,7 +85,9 @@
 - (void)cancel:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:^{
-        
+        if (self.dismissBlock) {
+            self.dismissBlock();
+        }
     }];
 }
 

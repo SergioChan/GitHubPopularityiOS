@@ -102,8 +102,6 @@
     
     [[SCDefaultsManager sharedManager] clearCache];
     
-    UIButton *button = (UIButton *)sender;
-    [button setTitle:@"Authenticating ... " forState:UIControlStateNormal];
     [self checkGitAuth];
 }
 
@@ -121,6 +119,10 @@
     
     githubAuthController.completionBlock = ^(void) {
         [weakAuthController dismissViewControllerAnimated:YES completion:nil];
+        [_updateInfoButton setTitle:@"Authenticating ... " forState:UIControlStateNormal];
+    };
+    githubAuthController.dismissBlock = ^(void) {
+        [_updateInfoButton setTitle:@"Refresh Authentication and Data " forState:UIControlStateNormal];
     };
 }
 
