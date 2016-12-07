@@ -27,19 +27,15 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 
 #import "GithubAuthenticatorView.h"
-
 #import "NSDictionary+UrlEncoding.h"
 
-@interface GithubAuthenticatorView()
-@property(nonatomic, strong) NSMutableData *data;
-@property(nonatomic, strong) NSURLConnection *tokenRequestConnection;
+@interface GithubAuthenticatorView() <NSURLSessionDelegate>
+
 @end
 
 @implementation GithubAuthenticatorView
 
-@synthesize data;
 @synthesize authDelegate;
-@synthesize tokenRequestConnection;
 
 -(id) initWithFrame:(CGRect)frame
 {
@@ -48,19 +44,12 @@
     if(self)
     {
         self.authDelegate = nil;
-        self.tokenRequestConnection = nil;
-        self.data = [NSMutableData data];
         self.scalesPageToFit = YES;
+        
         [self authorize];
     }
     
     return self;
-}
-
--(void) dealloc
-{
-    [tokenRequestConnection cancel];
-    self.delegate = nil;
 }
 
 -(void) authorize
@@ -113,10 +102,22 @@
         [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
         [request setHTTPBody:[paramString dataUsingEncoding:NSUTF8StringEncoding]];
         
-        self.tokenRequestConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+        AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
         
-        [tokenRequestConnection start];
-
+        [[manager dataTaskWithRequest:request
+                    completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+                        if (error) {
+                            [self.authDelegate didAuth:nil];
+                        } else {
+                            NSString *accesstoken = [responseObject objectForKey:@"access_token"];
+                            if(accesstoken)
+                            {
+                                [self.authDelegate didAuth:accesstoken];
+                                return;
+                            }
+                        }
+                    }] resume];
+        
         return NO;
     }
     
@@ -132,52 +133,5 @@
 {
 
 }
-
-
-#pragma Mark NSURLConnection delegates
-
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse
-{
-    return cachedResponse;
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)_data
-{
-    [self.data appendData:_data];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    [self.data setLength:0];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    NSError *jsonError = nil;
-    id jsonData = [NSJSONSerialization JSONObjectWithData:self.data options:0 error:&jsonError];
-    if(jsonData && [NSJSONSerialization isValidJSONObject:jsonData])
-    {
-        NSString *accesstoken = [jsonData objectForKey:@"access_token"];
-        if(accesstoken)
-        {
-            [self.authDelegate didAuth:accesstoken];
-            return;
-        }
-    }
-
-    [self.authDelegate didAuth:nil];
-}
-
-- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
-{
-    return request;
-}
-
-
 
 @end

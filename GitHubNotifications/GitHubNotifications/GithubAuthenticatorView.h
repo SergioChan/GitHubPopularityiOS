@@ -27,11 +27,12 @@
 //  POSSIBILITY OF SUCH DAMAGE.
 
 #import <Foundation/Foundation.h>
+#import <AFNetworking/AFHTTPSessionManager.h>
 
 #import "GithubAuthController.h"
 
 @interface GithubAuthenticatorView : UIWebView <UIWebViewDelegate>
 
-@property(nonatomic, weak) id<GitAuthDelegate> authDelegate;
+@property (nonatomic, weak) id<GitAuthDelegate> authDelegate;
 
 @end
