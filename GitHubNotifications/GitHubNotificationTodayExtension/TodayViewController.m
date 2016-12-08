@@ -56,7 +56,16 @@
 
     self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
     
-    [self updateGraphViewWithData:[[SCDefaultsManager sharedManager] getRenderStarArray]];
+    if (![[[SCDefaultsManager sharedManager] getUserName] isEqualToString:@""] && ![[[SCDefaultsManager sharedManager] getUserToken] isEqualToString:@""]) {
+        [[SCFollowerAndStarManager sharedManager] refreshData];
+        [[SCFollowerAndStarManager sharedManager] setCompletionBlock:^(id object){
+            NSLog(@"didFinishUpdatingStarData %ld",[object count]);
+            [[SCDefaultsManager sharedManager] setRenderStarArray:object];
+            [self updateGraphViewWithData:[[SCDefaultsManager sharedManager] getRenderStarArray]];
+        }];
+    } else {
+        [self updateGraphViewWithData:[[SCDefaultsManager sharedManager] getRenderStarArray]];
+    }
     
     // Do any additional setup after loading the view from its nib.
 }

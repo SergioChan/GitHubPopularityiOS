@@ -126,6 +126,7 @@
                     self.completionBlock(_starsArray);
                 }
                 [[SCDefaultsManager sharedManager] setRepoCached:YES];
+                [[SCDefaultsManager sharedManager] setStarNumber:starCount];
             } else {
                 [self updateNewStarsFromPage:page + 1];
             }
